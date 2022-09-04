@@ -1,14 +1,19 @@
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import { ReactNode } from 'react';
 import { drawerWidth } from '../../constants/drawer';
-import DepartmentsTree from '../../features/departments/DepartmentsTree';
 
 type SideBarProps = {
   handleDrawerToggle: () => void;
   mobileOpen: boolean;
+  children: ReactNode;
 };
 
-const SideBar = ({ handleDrawerToggle, mobileOpen }: SideBarProps) => {
+const SideBar = ({
+  handleDrawerToggle,
+  mobileOpen,
+  children,
+}: SideBarProps) => {
   return (
     <Box
       component="nav"
@@ -31,7 +36,7 @@ const SideBar = ({ handleDrawerToggle, mobileOpen }: SideBarProps) => {
           },
         }}
       >
-        <DepartmentsTree />
+        {children}
       </Drawer>
       <Drawer
         variant="permanent"
@@ -44,7 +49,7 @@ const SideBar = ({ handleDrawerToggle, mobileOpen }: SideBarProps) => {
         }}
         open
       >
-        <DepartmentsTree />
+        {children}
       </Drawer>
     </Box>
   );

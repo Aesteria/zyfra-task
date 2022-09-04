@@ -13,6 +13,7 @@ import SideBar from './components/ui/SideBar';
 import { useGetStaffQuery } from './features/api/api';
 import { useAppSelector } from './app/hooks';
 import Staff from './features/staff/Staff';
+import DepartmentsTree from './features/departments/DepartmentsTree';
 
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -56,10 +57,9 @@ function App() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <SideBar
-        handleDrawerToggle={handleDrawerToggle}
-        mobileOpen={mobileOpen}
-      />
+      <SideBar handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}>
+        <DepartmentsTree />
+      </SideBar>
       <Box
         component="main"
         sx={{
