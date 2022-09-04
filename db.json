@@ -35,7 +35,7 @@
   ],
   "staff": [
     {
-      "departmentId": 3,
+      "department": 3,
       "id": 1,
       "name": "Aesteria",
       "birthDate": "24/09/1990",
@@ -44,7 +44,7 @@
       "gender": "мужской"
     },
     {
-      "departmentId": 2,
+      "department": 2,
       "id": 2,
       "name": "Eleum",
       "birthDate": "24/09/1990",
@@ -53,7 +53,7 @@
       "gender": "женский"
     },
     {
-      "departmentId": 2,
+      "department": 2,
       "id": 3,
       "name": "Eleumia",
       "birthDate": "24/09/1990",

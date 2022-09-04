@@ -33,7 +33,7 @@ const Staff = ({ staff }: StaffProps) => {
   const addEmployeHandler = async (employeData: EmployeFormData) => {
     const res = await addEmploye({
       ...employeData,
-      departmentId: selectedDepartment as number,
+      department: selectedDepartment as number,
     });
 
     console.log(res);

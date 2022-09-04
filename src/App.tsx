@@ -27,9 +27,7 @@ function App() {
   };
 
   const staffFiltered = useMemo(() => {
-    return staff.filter(
-      (item: any) => item.departmentId === selectedDepartment
-    );
+    return staff.filter((item: any) => item.department === selectedDepartment);
   }, [staff, selectedDepartment]);
 
   return (
