@@ -44,13 +44,13 @@
       "gender": "мужской"
     },
     {
-      "department": 2,
-      "id": 2,
-      "name": "Eleum",
-      "birthDate": "24/09/1990",
-      "driversLicense": true,
+      "birthDate": "11/11/2001",
       "position": "Старший инженер",
-      "gender": "женский"
+      "gender": "женский",
+      "name": "sadddd",
+      "driversLicense": false,
+      "id": 2,
+      "department": 2
     },
     {
       "department": 2,
