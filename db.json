@@ -1,40 +1,65 @@
 {
-  "departments": {
-    "id": "root",
-    "name": "Структура",
-    "children": [
-      {
-        "id": "1",
-        "name": "Главный офис",
-        "children": [
-          {
-            "id": "2",
-            "name": "Бухгалтерия"
-          },
-          {
-            "id": "3",
-            "name": "Розница"
-          }
-        ]
-      },
-      {
-        "id": "4",
-        "name": "Отдел производства",
-        "children": [
-          {
-            "id": "5",
-            "name": "Отдел снабжения"
-          },
-          {
-            "id": "6",
-            "name": "Производственно-технический отдел"
-          },
-          {
-            "id": "7",
-            "name": "Строительный"
-          }
-        ]
-      }
-    ]
-  }
+  "departments": [
+    {
+      "id": 1,
+      "name": "Главный офис",
+      "children": [
+        {
+          "id": 2,
+          "name": "Бухгалтерия"
+        },
+        {
+          "id": 3,
+          "name": "Розница"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Отдел производства",
+      "children": [
+        {
+          "id": 5,
+          "name": "Отдел снабжения"
+        },
+        {
+          "id": 6,
+          "name": "Производственно-технический отдел"
+        },
+        {
+          "id": 7,
+          "name": "Строительный"
+        }
+      ]
+    }
+  ],
+  "staff": [
+    {
+      "departmentId": 3,
+      "id": 1,
+      "name": "Aesteria",
+      "birthDate": "24/09/1990",
+      "driversLicense": false,
+      "position": "Старший инженер",
+      "gender": "мужской"
+    },
+    {
+      "departmentId": 2,
+      "id": 2,
+      "name": "Eleum",
+      "birthDate": "24/09/1990",
+      "driversLicense": true,
+      "position": "Старший инженер",
+      "gender": "женский"
+    },
+    {
+      "departmentId": 2,
+      "id": 3,
+      "name": "Eleumia",
+      "birthDate": "24/09/1990",
+      "driversLicense": false,
+      "position": "Старший инженер",
+      "gender": "мужской"
+    }
+  ]
 }

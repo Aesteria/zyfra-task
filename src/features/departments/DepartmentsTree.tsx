@@ -5,23 +5,37 @@ import TreeItem from '@mui/lab/TreeItem';
 import Divider from '@mui/material/Divider';
 import { useGetDepartmentsQuery } from '../api/api';
 import Toolbar from '@mui/material/Toolbar';
+import { useAppDispatch } from '../../app/hooks';
+import { selectActiveDepartment } from './departmentsSlice';
 
 type RenderTree = {
-  id: string;
+  id: string | number;
   name: string;
   children?: readonly RenderTree[];
 };
 
 const DepartmentsTree = () => {
   const { data: departments, isSuccess, isLoading } = useGetDepartmentsQuery();
+  const dispatch = useAppDispatch();
 
-  const departmentsTree = (nodes: RenderTree) => (
-    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.name}>
-      {Array.isArray(nodes.children)
-        ? nodes.children.map((node) => departmentsTree(node))
-        : null}
-    </TreeItem>
-  );
+  const departmentsTree = (nodes: RenderTree) => {
+    return (
+      <TreeItem
+        key={nodes.id}
+        nodeId={nodes.id.toString()}
+        label={nodes.name}
+        onClick={
+          nodes.id === 'root'
+            ? undefined
+            : () => dispatch(selectActiveDepartment(nodes.id as number))
+        }
+      >
+        {Array.isArray(nodes.children)
+          ? nodes.children.map((node) => departmentsTree(node))
+          : null}
+      </TreeItem>
+    );
+  };
 
   const content = isSuccess && (
     <TreeView
@@ -30,7 +44,7 @@ const DepartmentsTree = () => {
       defaultExpandIcon={<ChevronRightIcon />}
       sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
     >
-      {departmentsTree(departments)}
+      {departmentsTree({ id: 'root', name: 'Root', children: departments })}
     </TreeView>
   );
 

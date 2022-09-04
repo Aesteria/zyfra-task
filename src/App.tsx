@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -10,13 +10,26 @@ import Typography from '@mui/material/Typography';
 
 import { drawerWidth } from './constants/drawer';
 import SideBar from './components/ui/SideBar';
+import { useGetStaffQuery } from './features/api/api';
+import { useAppSelector } from './app/hooks';
+import Staff from './features/staff/Staff';
 
 function App() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const { data: staff = [], isSuccess } = useGetStaffQuery();
+  const selectedDepartment = useAppSelector(
+    (state) => state.departments.selected
+  );
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  const staffFiltered = useMemo(() => {
+    return staff.filter(
+      (item: any) => item.departmentId === selectedDepartment
+    );
+  }, [staff, selectedDepartment]);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -56,7 +69,9 @@ function App() {
         }}
       >
         <Toolbar />
-        <Typography>Hello App</Typography>
+        {isSuccess && staffFiltered.length > 0 && (
+          <Staff staff={staffFiltered} />
+        )}
       </Box>
     </Box>
   );
