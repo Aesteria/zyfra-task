@@ -24,6 +24,9 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Employe'],
     }),
+    getEmployeById: builder.query<Employe, number>({
+      query: (id) => `/staff/${id}`,
+    }),
     removeEmployee: builder.mutation({
       query: (id: number) => ({
         url: `/staff/${id}`,
@@ -48,4 +51,5 @@ export const {
   useAddNewEmployeMutation,
   useRemoveEmployeeMutation,
   useEditEmployeeMutation,
+  useGetEmployeByIdQuery,
 } = apiSlice;

@@ -19,13 +19,13 @@ const headings = [
 type StaffTableProps = {
   staff: Employe[];
   removeEmployeHandler: (id: number) => Promise<void>;
-  openEditModalHandler: (employe: Employe) => void;
+  openModalHandler: (id?: number) => void;
 };
 
 const StaffTable = ({
   staff,
   removeEmployeHandler,
-  openEditModalHandler,
+  openModalHandler,
 }: StaffTableProps) => {
   return (
     <TableContainer>
@@ -60,7 +60,7 @@ const StaffTable = ({
 
                 <IconButton
                   aria-label="edit"
-                  onClick={() => openEditModalHandler(employe)}
+                  onClick={() => openModalHandler(employe.id)}
                 >
                   <EditIcon sx={{ color: 'green' }} />
                 </IconButton>

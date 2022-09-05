@@ -1,5 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import Box from '@mui/material/Box';
+import { useEffect } from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { Employe, EmployeFormData } from '../../types/staff';
+import { useGetEmployeByIdQuery } from '../api/api';
+
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,65 +14,103 @@ import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { Controller, useForm } from 'react-hook-form';
-import * as yup from 'yup';
+import { Controller } from 'react-hook-form';
 import { genders } from '../../constants/genders';
-import { EmployeFormData } from '../../types/staff';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import dayjs from 'dayjs';
+import Box from '@mui/material/Box';
 
-type AddEmployeDialogProps = {
+type AddEditEmployeDialogProps = {
+  employeId: number | null;
+  editEmployeHandler: (employeData: Employe) => Promise<void>;
+  addEmployeHandler: (employeData: EmployeFormData) => Promise<void>;
   open: boolean;
   onClose: () => void;
-  addEmployeHandler: (employeData: EmployeFormData) => Promise<void>;
 };
 
-const schema = yup
-  .object({
-    name: yup.string().required('Необходимо указать имя'),
-    gender: yup.string().required('Необходимо указать пол'),
-    position: yup.string().required('Необходимо указать должность'),
-    birthDate: yup
-      .date()
-      .required('Необходимо указать дату рождения')
-      .typeError('Некорректная дата рождения'),
-  })
-  .required();
-
-const AddEmployeDialog = ({
-  onClose,
-  open,
+const AddEditEmployeDialog = ({
+  employeId,
+  editEmployeHandler,
   addEmployeHandler,
-}: AddEmployeDialogProps) => {
+  open,
+  onClose,
+}: AddEditEmployeDialogProps) => {
+  const isAddMode = !employeId;
+
+  const validationSchema = yup
+    .object({
+      name: yup.string().required('Необходимо указать имя'),
+      gender: yup.string().required('Необходимо указать пол'),
+      position: yup.string().required('Необходимо указать должность'),
+      birthDate: yup
+        .date()
+        .required('Необходимо указать дату рождения')
+        .typeError('Некорректная дата рождения'),
+    })
+    .required();
+
   const {
     handleSubmit,
     control,
+    setValue,
     formState: { errors },
-  } = useForm({
+  } = useForm<EmployeFormData>({
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       name: '',
       birthDate: '',
       gender: 'мужской',
       position: '',
       driversLicense: false,
-    } as EmployeFormData,
-    resolver: yupResolver(schema),
+    },
   });
+
+  const { data: employe, isSuccess } = useGetEmployeByIdQuery(
+    employeId as number,
+    {
+      skip: isAddMode,
+    }
+  );
+
+  const onSubmit = (data: EmployeFormData) => {
+    const formattedBirthDate = dayjs(data.birthDate).format('DD/MM/YYYY');
+    return isAddMode
+      ? addEmployeHandler({ ...data, birthDate: formattedBirthDate })
+      : isSuccess &&
+          editEmployeHandler({
+            ...data,
+            id: employe.id,
+            department: employe.department,
+            birthDate: formattedBirthDate,
+          });
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      console.log('lol');
+      const fields = [
+        'name',
+        'gender',
+        'position',
+        'birthday',
+        'driversLicense',
+      ];
+      fields.forEach((field) =>
+        setValue(
+          field as keyof EmployeFormData,
+          employe[field as keyof EmployeFormData]
+        )
+      );
+    }
+  }, [employe, isSuccess, setValue]);
 
   return (
     <Dialog onClose={onClose} open={open}>
       <DialogTitle>Добавить работника</DialogTitle>
-      <Box
-        component="form"
-        noValidate
-        onSubmit={handleSubmit((data) => {
-          const formattedBirthDate = dayjs(data.birthDate).format('DD/MM/YYYY');
-          addEmployeHandler({ ...data, birthDate: formattedBirthDate });
-        })}
-      >
+      <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
           <Controller
             name="gender"
@@ -176,11 +219,13 @@ const AddEmployeDialog = ({
           <Button onClick={onClose} type="button">
             Отмена
           </Button>
-          <Button type="submit">Добавить работника</Button>
+          <Button type="submit">
+            {isAddMode ? 'Добавить работника' : 'Сохранить изменения'}
+          </Button>
         </DialogActions>
       </Box>
     </Dialog>
   );
 };
 
-export default AddEmployeDialog;
+export default AddEditEmployeDialog;

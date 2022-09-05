@@ -3,26 +3,24 @@ import { useMemo, useState } from 'react';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import { Employe, EmployeFormData } from '../../types/staff';
 import StaffTable from './StaffTable';
-import AddEmployeeDialog from './AddEmployeDialog';
 import {
   useAddNewEmployeMutation,
   useEditEmployeeMutation,
   useGetStaffQuery,
   useRemoveEmployeeMutation,
 } from '../api/api';
-import EditEmployeDialog from './EditEmployeDialog';
 import { useParams } from 'react-router-dom';
+import AddEditEmployeDialog from './AddEditEmployeDialog';
 
 type EditModalState = {
-  employe: null | Employe;
+  employeId: number | null;
   open: boolean;
 };
 
 const Staff = () => {
   const { data: staff = [], isSuccess } = useGetStaffQuery();
-  const [open, setOpen] = useState(false);
-  const [editModal, setEditModal] = useState<EditModalState>({
-    employe: null,
+  const [open, setOpen] = useState<EditModalState>({
+    employeId: null,
     open: false,
   });
   const [addEmploye] = useAddNewEmployeMutation();
@@ -35,26 +33,22 @@ const Staff = () => {
     return staff.filter((item: any) => item.department === selectedDepartment);
   }, [staff, selectedDepartment]);
 
-  const openModalHandler = () => {
-    setOpen(true);
+  const openModalHandler = (id?: number) => {
+    if (id) {
+      setOpen({
+        open: true,
+        employeId: id,
+      });
+    } else {
+      setOpen({
+        open: true,
+        employeId: null,
+      });
+    }
   };
 
   const closeModalHandler = () => {
-    setOpen(false);
-  };
-
-  const openEditModalHandler = (employe: Employe) => {
-    setEditModal({
-      open: true,
-      employe,
-    });
-  };
-
-  const closeEditModalHandler = () => {
-    setEditModal({
-      open: false,
-      employe: null,
-    });
+    setOpen((prevState) => ({ ...prevState, open: false }));
   };
 
   const addEmployeHandler = async (employeData: EmployeFormData) => {
@@ -92,25 +86,21 @@ const Staff = () => {
           variant="contained"
           startIcon={<AddCircleIcon />}
           size="large"
-          onClick={openModalHandler}
+          onClick={() => openModalHandler()}
         >
           Добавить работника
         </Button>
         <StaffTable
           staff={staffFiltered}
           removeEmployeHandler={removeEmployeHandler}
-          openEditModalHandler={openEditModalHandler}
+          openModalHandler={openModalHandler}
         />
-        <AddEmployeeDialog
-          open={open}
-          onClose={closeModalHandler}
+        <AddEditEmployeDialog
           addEmployeHandler={addEmployeHandler}
-        />
-        <EditEmployeDialog
-          open={editModal.open}
-          onClose={closeEditModalHandler}
           editEmployeHandler={editEmployeHandler}
-          employe={editModal.employe}
+          employeId={open.employeId}
+          onClose={closeModalHandler}
+          open={open.open}
         />
       </div>
     );
