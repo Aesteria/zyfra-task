@@ -2,33 +2,29 @@
   "departments": [
     {
       "id": 1,
-      "name": "Главный офис",
+      "name": "It отдел",
       "children": [
         {
           "id": 2,
-          "name": "Бухгалтерия"
+          "name": "Frontend"
         },
         {
           "id": 3,
-          "name": "Розница"
+          "name": "Backend"
         }
       ]
     },
     {
       "id": 4,
-      "name": "Отдел производства",
+      "name": "Отдел тестировщиков",
       "children": [
         {
           "id": 5,
-          "name": "Отдел снабжения"
+          "name": "E2E Test"
         },
         {
           "id": 6,
-          "name": "Производственно-технический отдел"
-        },
-        {
-          "id": 7,
-          "name": "Строительный"
+          "name": "Unit Testing"
         }
       ]
     }
@@ -40,12 +36,12 @@
       "name": "Aesteria",
       "birthDate": "24/09/1990",
       "driversLicense": false,
-      "position": "Старший инженер",
+      "position": "Senior Python Developer",
       "gender": "мужской"
     },
     {
       "birthDate": "11/11/2001",
-      "position": "Старший инженер",
+      "position": "Middle React Developer",
       "gender": "женский",
       "name": "sadddd",
       "driversLicense": false,
@@ -53,13 +49,13 @@
       "department": 2
     },
     {
+      "birthDate": "22/09/2022",
+      "position": "Junior Angular Developer",
+      "gender": "женский",
+      "name": "Alice Doe",
+      "driversLicense": true,
       "department": 2,
-      "id": 3,
-      "name": "Eleumia",
-      "birthDate": "24/09/1990",
-      "driversLicense": false,
-      "position": "Старший инженер",
-      "gender": "мужской"
+      "id": 4
     }
   ]
 }

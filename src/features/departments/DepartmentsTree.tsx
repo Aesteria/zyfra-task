@@ -5,8 +5,7 @@ import TreeItem from '@mui/lab/TreeItem';
 import Divider from '@mui/material/Divider';
 import { useGetDepartmentsQuery } from '../api/api';
 import Toolbar from '@mui/material/Toolbar';
-import { useAppDispatch } from '../../app/hooks';
-import { selectActiveDepartment } from './departmentsSlice';
+import { Link } from 'react-router-dom';
 
 type RenderTree = {
   id: string | number;
@@ -16,18 +15,23 @@ type RenderTree = {
 
 const DepartmentsTree = () => {
   const { data: departments, isSuccess, isLoading } = useGetDepartmentsQuery();
-  const dispatch = useAppDispatch();
 
   const departmentsTree = (nodes: RenderTree) => {
     return (
       <TreeItem
         key={nodes.id}
         nodeId={nodes.id.toString()}
-        label={nodes.name}
-        onClick={
-          nodes.id === 'root'
-            ? undefined
-            : () => dispatch(selectActiveDepartment(nodes.id as number))
+        label={
+          <Link
+            style={{
+              display: 'block',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+            to={`/departments/${nodes.id}`}
+          >
+            {nodes.name}
+          </Link>
         }
       >
         {Array.isArray(nodes.children)
@@ -44,7 +48,11 @@ const DepartmentsTree = () => {
       defaultExpandIcon={<ChevronRightIcon />}
       sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
     >
-      {departmentsTree({ id: 'root', name: 'Root', children: departments })}
+      {departmentsTree({
+        id: 'root',
+        name: 'Подразделения',
+        children: departments,
+      })}
     </TreeView>
   );
 
