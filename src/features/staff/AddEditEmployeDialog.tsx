@@ -31,6 +31,14 @@ type AddEditEmployeDialogProps = {
   onClose: () => void;
 };
 
+const initialState: EmployeFormData = {
+  birthDate: '',
+  driversLicense: false,
+  gender: 'мужской',
+  name: '',
+  position: '',
+};
+
 const AddEditEmployeDialog = ({
   employeId,
   editEmployeHandler,
@@ -56,16 +64,11 @@ const AddEditEmployeDialog = ({
     handleSubmit,
     control,
     setValue,
-    formState: { errors },
+    formState: { errors, isSubmitSuccessful },
+    reset,
   } = useForm<EmployeFormData>({
     resolver: yupResolver(validationSchema),
-    defaultValues: {
-      name: '',
-      birthDate: '',
-      gender: 'мужской',
-      position: '',
-      driversLicense: false,
-    },
+    defaultValues: initialState,
   });
 
   const { data: employe, isSuccess } = useGetEmployeByIdQuery(
@@ -106,6 +109,12 @@ const AddEditEmployeDialog = ({
       );
     }
   }, [employe, isSuccess, setValue]);
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset(initialState);
+    }
+  }, [isSubmitSuccessful, reset]);
 
   return (
     <Dialog onClose={onClose} open={open}>
