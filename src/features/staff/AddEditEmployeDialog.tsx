@@ -32,7 +32,7 @@ type AddEditEmployeDialogProps = {
 };
 
 const initialState: EmployeFormData = {
-  birthDate: '',
+  birthDate: null,
   driversLicense: false,
   gender: 'мужской',
   name: '',
@@ -79,6 +79,7 @@ const AddEditEmployeDialog = ({
   );
 
   const onSubmit = (data: EmployeFormData) => {
+    console.log(data);
     const formattedBirthDate = dayjs(data.birthDate).format('DD/MM/YYYY');
     return isAddMode
       ? addEmployeHandler({ ...data, birthDate: formattedBirthDate })

@@ -54,6 +54,7 @@ const Staff = () => {
   const addEmployeHandler = async (employeData: EmployeFormData) => {
     const res = await addEmploye({
       ...employeData,
+      birthDate: employeData.birthDate as string,
       department: selectedDepartment as number,
     });
 
