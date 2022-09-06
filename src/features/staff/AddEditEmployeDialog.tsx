@@ -79,7 +79,6 @@ const AddEditEmployeDialog = ({
   );
 
   const onSubmit = (data: EmployeFormData) => {
-    console.log(data);
     const formattedBirthDate = dayjs(data.birthDate).format('DD/MM/YYYY');
     return isAddMode
       ? addEmployeHandler({ ...data, birthDate: formattedBirthDate })
@@ -94,7 +93,6 @@ const AddEditEmployeDialog = ({
 
   useEffect(() => {
     if (isSuccess) {
-      console.log('lol');
       const fields = [
         'name',
         'gender',
