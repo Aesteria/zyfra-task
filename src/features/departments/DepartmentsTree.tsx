@@ -14,7 +14,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Department, DepartmentFormData } from '../../types/department';
 import EditIcon from '@mui/icons-material/Edit';
-import { useCallback, useState } from 'react';
+import React, { SyntheticEvent, useCallback, useState } from 'react';
 import AddEditDepartmentDialog from './AddEditDepartmentDialog';
 import { toast } from 'react-toastify';
 
@@ -34,6 +34,8 @@ const DepartmentsTree = () => {
     open: false,
     isEdit: false,
   });
+  const [selected, setSelected] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const openModalHandler = (id: string, edit: boolean) => {
     if (id) {
@@ -83,15 +85,15 @@ const DepartmentsTree = () => {
     }
   };
 
-  let navigate = useNavigate();
-
   const renderTree = (nodes: Department[], parentId: string) => {
     if (isSuccess) {
       const filtered = nodes.filter((node) => node.departmentId === parentId);
       return filtered.map((node) => (
         <TreeItem
           onClick={() => {
-            navigate(`/departments/${node.id}`);
+            if (selected !== node.id) {
+              navigate(`/departments/${node.id}`);
+            }
           }}
           key={node.id}
           nodeId={node.id.toString()}
@@ -142,12 +144,17 @@ const DepartmentsTree = () => {
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
         sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
+        onNodeSelect={(event: SyntheticEvent, nodeId: string) => {
+          setSelected(nodeId);
+        }}
       >
         {isSuccess && (
           <TreeItem
             nodeId="root"
             onClick={() => {
-              navigate('/departments/root');
+              if (selected !== 'root') {
+                navigate('/departments/root');
+              }
             }}
             label={
               <div style={{ display: 'flex' }}>

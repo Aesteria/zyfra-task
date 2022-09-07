@@ -109,7 +109,7 @@ const AddEditEmployeDialog = ({
 
   useEffect(() => {
     if (isSubmitSuccessful) {
-      reset(initialState);
+      // reset(initialState);
     }
   }, [isSubmitSuccessful, reset]);
 
@@ -117,7 +117,7 @@ const AddEditEmployeDialog = ({
     <Dialog
       onClose={() => {
         onClose();
-        reset(initialState);
+        // reset(initialState);
       }}
       open={open}
     >
