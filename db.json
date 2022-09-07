@@ -59,6 +59,13 @@
       "name": "Локс А.А",
       "departmentId": "root",
       "id": "E37KY8q"
+    },
+    {
+      "description": "asd",
+      "createdAt": "2022-09-07T13:43:47.000Z",
+      "name": "ads",
+      "departmentId": "1",
+      "id": "AgkINoZ"
     }
   ],
   "staff": [
@@ -133,6 +140,24 @@
       "driversLicense": true,
       "department": "3",
       "id": "qL-_1Rq"
+    },
+    {
+      "birthDate": "1993-11-10T21:00:00.000Z",
+      "position": "asd",
+      "gender": "мужской",
+      "name": "asd",
+      "driversLicense": true,
+      "department": "3",
+      "id": "YRQ4mUA"
+    },
+    {
+      "birthDate": "1999-11-10T21:00:00.000Z",
+      "position": "ads",
+      "gender": "мужской",
+      "name": "das",
+      "driversLicense": true,
+      "department": "AgkINoZ",
+      "id": "Ui-ILPj"
     }
   ]
 }

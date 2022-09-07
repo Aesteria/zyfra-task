@@ -49,7 +49,10 @@ const Staff = () => {
   };
 
   const closeModalHandler = () => {
-    setOpen((prevState) => ({ ...prevState, open: false }));
+    setOpen({
+      employeId: null,
+      open: false,
+    });
   };
 
   const addEmployeHandler = async (employeData: EmployeFormData) => {
@@ -75,6 +78,7 @@ const Staff = () => {
   const editEmployeHandler = async (employe: Employe) => {
     try {
       await editEmploye(employe);
+      closeModalHandler();
       console.log('Succesfully edit contact');
     } catch (e: any) {
       console.log(e);

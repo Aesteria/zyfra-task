@@ -104,7 +104,13 @@ const AddEditDepartmentDialog = ({
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <Dialog onClose={onClose} open={open}>
+    <Dialog
+      onClose={() => {
+        onClose();
+        reset(initialState);
+      }}
+      open={open}
+    >
       <DialogTitle>
         {isAddMode ? 'Добавить Подразделение' : 'Изменить подразделение'}
       </DialogTitle>

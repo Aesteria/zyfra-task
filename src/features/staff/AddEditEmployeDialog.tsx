@@ -114,7 +114,13 @@ const AddEditEmployeDialog = ({
   }, [isSubmitSuccessful, reset]);
 
   return (
-    <Dialog onClose={onClose} open={open}>
+    <Dialog
+      onClose={() => {
+        onClose();
+        reset(initialState);
+      }}
+      open={open}
+    >
       <DialogTitle>Добавить работника</DialogTitle>
       <Box component="form" noValidate onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
