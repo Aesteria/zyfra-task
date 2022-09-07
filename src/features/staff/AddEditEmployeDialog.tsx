@@ -31,7 +31,7 @@ type AddEditEmployeDialogProps = {
 };
 
 const initialState: EmployeFormData = {
-  birthDate: null,
+  birthDate: new Date('1996').toString(),
   driversLicense: false,
   gender: 'мужской',
   name: '',
@@ -85,7 +85,7 @@ const AddEditEmployeDialog = ({
             ...data,
             id: employe.id,
             department: employe.department,
-            birthDate: data.birthDate as string,
+            birthDate: data.birthDate,
           });
   };
 

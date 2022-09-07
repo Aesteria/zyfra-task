@@ -10,7 +10,7 @@ export type Employe = {
 
 export type EmployeFormData = {
   name: string;
-  birthDate: string | null;
+  birthDate: string;
   gender: 'мужской' | 'женский';
   position: string;
   driversLicense: boolean;

@@ -2,7 +2,7 @@ export type Department = {
   id: string;
   name: string;
   departmentId: string;
-  createdAt: string | null;
+  createdAt: string;
   description: string;
 };
 
