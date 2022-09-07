@@ -6,11 +6,12 @@ type AddNewEmployeQuery = Omit<Employe, 'id'>;
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  tagTypes: ['Employe'],
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3000' }),
+  tagTypes: ['Employe', 'Department'],
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3004' }),
   endpoints: (builder) => ({
     getDepartments: builder.query<Department[], void>({
       query: () => '/departments',
+      providesTags: ['Department'],
     }),
     getStaff: builder.query<Employe[], void>({
       query: () => `/staff`,
@@ -24,11 +25,11 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Employe'],
     }),
-    getEmployeById: builder.query<Employe, number>({
+    getEmployeById: builder.query<Employe, string>({
       query: (id) => `/staff/${id}`,
     }),
     removeEmployee: builder.mutation({
-      query: (id: number) => ({
+      query: (id: string) => ({
         url: `/staff/${id}`,
         method: 'DELETE',
       }),
@@ -42,6 +43,21 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Employe'],
     }),
+    addDepartment: builder.mutation({
+      query: (department: Omit<Department, 'id'>) => ({
+        url: `/departments/`,
+        method: 'POST',
+        body: department,
+      }),
+      invalidatesTags: ['Department'],
+    }),
+    removeDepartment: builder.mutation({
+      query: (id: string) => ({
+        url: `/departments/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Department'],
+    }),
   }),
 });
 
@@ -52,4 +68,6 @@ export const {
   useRemoveEmployeeMutation,
   useEditEmployeeMutation,
   useGetEmployeByIdQuery,
+  useAddDepartmentMutation,
+  useRemoveDepartmentMutation,
 } = apiSlice;

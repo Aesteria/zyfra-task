@@ -1,38 +1,44 @@
 {
   "departments": [
     {
-      "id": 1,
-      "name": "It отдел",
-      "children": [
-        {
-          "id": 2,
-          "name": "Frontend"
-        },
-        {
-          "id": 3,
-          "name": "Backend"
-        }
-      ]
+      "id": "root",
+      "name": "Root"
     },
     {
-      "id": 4,
+      "id": "1",
+      "name": "It department",
+      "departmentId": "root"
+    },
+    {
+      "id": "2",
+      "name": "Frontend",
+      "departmentId": "1"
+    },
+    {
+      "id": "3",
+      "name": "Backend",
+      "departmentId": "1"
+    },
+    {
+      "id": "4",
       "name": "Отдел тестировщиков",
-      "children": [
-        {
-          "id": 5,
-          "name": "E2E Test"
-        },
-        {
-          "id": 6,
-          "name": "Unit Testing"
-        }
-      ]
+      "departmentId": "root"
+    },
+    {
+      "id": "5",
+      "name": "E2E Test",
+      "departmentId": "4"
+    },
+    {
+      "id": "6",
+      "name": "Unit Testing",
+      "departmentId": "4"
     }
   ],
   "staff": [
     {
-      "department": 3,
-      "id": 1,
+      "department": "3",
+      "id": "1",
       "name": "Aesteria",
       "birthDate": "24/09/1990",
       "driversLicense": false,
@@ -45,8 +51,8 @@
       "gender": "женский",
       "name": "sadddd",
       "driversLicense": false,
-      "id": 2,
-      "department": 2
+      "id": "2",
+      "department": "2"
     },
     {
       "birthDate": "22/09/2022",
@@ -54,8 +60,8 @@
       "gender": "женский",
       "name": "Alice Doe",
       "driversLicense": true,
-      "department": 2,
-      "id": 4
+      "department": "2",
+      "id": "4"
     }
   ]
 }
