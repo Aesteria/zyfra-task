@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 import AddEditEmployeDialog from './AddEditEmployeDialog';
 
 type EditModalState = {
-  employeId: number | null;
+  employeId: string | null;
   open: boolean;
 };
 
@@ -26,14 +26,15 @@ const Staff = () => {
   const [addEmploye] = useAddNewEmployeMutation();
   const [removeEmploye] = useRemoveEmployeeMutation();
   const [editEmploye] = useEditEmployeeMutation();
-  const { departmentId } = useParams<{ departmentId: string }>();
-  const selectedDepartment = parseInt(departmentId as string, 10);
+  const { departmentId: selectedDepartment } = useParams<{
+    departmentId: string;
+  }>();
 
   const staffFiltered = useMemo(() => {
     return staff.filter((item: any) => item.department === selectedDepartment);
   }, [staff, selectedDepartment]);
 
-  const openModalHandler = (id?: number) => {
+  const openModalHandler = (id?: string) => {
     if (id) {
       setOpen({
         open: true,
@@ -52,16 +53,18 @@ const Staff = () => {
   };
 
   const addEmployeHandler = async (employeData: EmployeFormData) => {
-    const res = await addEmploye({
-      ...employeData,
-      birthDate: employeData.birthDate as string,
-      department: selectedDepartment as number,
-    });
-
-    console.log(res);
+    try {
+      await addEmploye({
+        ...employeData,
+        birthDate: employeData.birthDate as string,
+        department: selectedDepartment as string,
+      });
+    } catch (e: any) {
+      console.log(e);
+    }
   };
 
-  const removeEmployeHandler = async (id: number) => {
+  const removeEmployeHandler = async (id: string) => {
     try {
       await removeEmploye(id);
     } catch (e: any) {

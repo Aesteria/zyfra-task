@@ -18,8 +18,8 @@ const headings = [
 
 type StaffTableProps = {
   staff: Employe[];
-  removeEmployeHandler: (id: number) => Promise<void>;
-  openModalHandler: (id?: number) => void;
+  removeEmployeHandler: (id: string) => Promise<void>;
+  openModalHandler: (id?: string) => void;
 };
 
 const StaffTable = ({

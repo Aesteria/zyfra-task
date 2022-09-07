@@ -4,8 +4,8 @@ export type Employe = {
   gender: 'мужской' | 'женский';
   position: string;
   driversLicense: boolean;
-  id: number;
-  department: number;
+  id: string;
+  department: string;
 };
 
 export type EmployeFormData = {

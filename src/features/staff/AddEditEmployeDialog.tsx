@@ -24,7 +24,7 @@ import dayjs from 'dayjs';
 import Box from '@mui/material/Box';
 
 type AddEditEmployeDialogProps = {
-  employeId: number | null;
+  employeId: string | null;
   editEmployeHandler: (employeData: Employe) => Promise<void>;
   addEmployeHandler: (employeData: EmployeFormData) => Promise<void>;
   open: boolean;
@@ -72,7 +72,7 @@ const AddEditEmployeDialog = ({
   });
 
   const { data: employe, isSuccess } = useGetEmployeByIdQuery(
-    employeId as number,
+    employeId as string,
     {
       skip: isAddMode,
     }

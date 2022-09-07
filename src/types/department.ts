@@ -1,5 +1,5 @@
 export type Department = {
   id: string;
   name: string;
-  children?: Department[];
+  departmentId: string;
 };
