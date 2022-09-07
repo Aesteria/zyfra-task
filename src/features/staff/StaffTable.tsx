@@ -10,6 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
+import { styled } from '@mui/material/styles';
 const headings = [
   'ФИО',
   'Дата рождения',
@@ -24,7 +25,15 @@ type StaffTableProps = {
   openModalHandler: (id?: string) => void;
 };
 
-// const formattedBirthDate = dayjs(data.birthDate).format('DD/MM/YYYY');
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
 const StaffTable = ({
   staff,
@@ -43,10 +52,7 @@ const StaffTable = ({
         </TableHead>
         <TableBody>
           {staff.map((employe) => (
-            <TableRow
-              key={employe.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
+            <StyledTableRow key={employe.id}>
               <TableCell component="th" scope="row">
                 {employe.name}
               </TableCell>
@@ -73,7 +79,7 @@ const StaffTable = ({
 
                 <Button variant="outlined">Изменить отдел</Button>
               </TableCell>
-            </TableRow>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>
