@@ -4,13 +4,15 @@ import HomePage from './pages/Home';
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<HomePage />}>
-          <Route path="/departments/:departmentId" element={<Staff />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />}>
+            <Route path="/departments/:departmentId" element={<Staff />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 };
 

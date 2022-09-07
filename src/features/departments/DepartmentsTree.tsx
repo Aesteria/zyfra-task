@@ -14,8 +14,9 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Department, DepartmentFormData } from '../../types/department';
 import EditIcon from '@mui/icons-material/Edit';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import AddEditDepartmentDialog from './AddEditDepartmentDialog';
+import { toast } from 'react-toastify';
 
 type EditModalState = {
   departmentId: string | null;
@@ -50,16 +51,21 @@ const DepartmentsTree = () => {
     }
   };
 
-  const closeModalHandler = () => {
-    setModal((prevState) => ({ ...prevState, open: false }));
-  };
+  const closeModalHandler = useCallback(() => {
+    setModal({
+      departmentId: null,
+      isEdit: false,
+      open: false,
+    });
+  }, []);
 
   const editDepartmentHandler = async (employe: Department) => {
     try {
       await editDepartment(employe);
-      console.log('Succesfully edit department');
+      toast('изменения сохранены!');
     } catch (e: any) {
       console.log(e);
+      toast.warn('что-то пошло не так');
     }
   };
 
@@ -70,8 +76,10 @@ const DepartmentsTree = () => {
         createdAt: departmentData.createdAt as string,
         departmentId: modal.departmentId as string,
       });
+      toast(`Подразделение ${departmentData.name} добавлено`);
     } catch (e: any) {
       console.log(e);
+      toast.warn('что-то пошло не так');
     }
   };
 
@@ -99,7 +107,17 @@ const DepartmentsTree = () => {
               <DeleteIcon
                 onClick={(e) => {
                   e.stopPropagation();
-                  removeDepartment(node.id);
+                  const removeDep = async () => {
+                    try {
+                      await removeDepartment(node.id);
+                      toast.success('Подразделение успешно удалено');
+                    } catch (e) {
+                      console.log(e);
+                      toast.warn('что-то пошло не так');
+                    }
+                  };
+
+                  removeDep();
                 }}
               />
               <EditIcon
@@ -149,14 +167,16 @@ const DepartmentsTree = () => {
           </TreeItem>
         )}
       </TreeView>
-      <AddEditDepartmentDialog
-        addDepartmentHandler={addDepartmentHandler}
-        onClose={closeModalHandler}
-        departmentId={modal.departmentId}
-        editDepartmentHandler={editDepartmentHandler}
-        open={modal.open}
-        isEdit={modal.isEdit}
-      />
+      {modal.open && (
+        <AddEditDepartmentDialog
+          addDepartmentHandler={addDepartmentHandler}
+          onClose={closeModalHandler}
+          departmentId={modal.departmentId}
+          editDepartmentHandler={editDepartmentHandler}
+          open={modal.open}
+          isEdit={modal.isEdit}
+        />
+      )}
     </>
   );
 };

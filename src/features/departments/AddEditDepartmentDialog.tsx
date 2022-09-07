@@ -100,8 +100,9 @@ const AddEditDepartmentDialog = ({
   useEffect(() => {
     if (isSubmitSuccessful) {
       reset(initialState);
+      onClose();
     }
-  }, [isSubmitSuccessful, reset]);
+  }, [isSubmitSuccessful, reset, onClose]);
 
   return (
     <Dialog

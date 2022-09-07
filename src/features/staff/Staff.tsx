@@ -11,6 +11,7 @@ import {
 } from '../api/api';
 import { useParams } from 'react-router-dom';
 import AddEditEmployeDialog from './AddEditEmployeDialog';
+import { toast } from 'react-toastify';
 
 type EditModalState = {
   employeId: string | null;
@@ -24,7 +25,7 @@ const Staff = () => {
     isLoading,
     isError,
   } = useGetStaffQuery();
-  const [open, setOpen] = useState<EditModalState>({
+  const [modal, setModal] = useState<EditModalState>({
     employeId: null,
     open: false,
   });
@@ -41,12 +42,12 @@ const Staff = () => {
 
   const openModalHandler = (id?: string) => {
     if (id) {
-      setOpen({
+      setModal({
         open: true,
         employeId: id,
       });
     } else {
-      setOpen({
+      setModal({
         open: true,
         employeId: null,
       });
@@ -54,7 +55,7 @@ const Staff = () => {
   };
 
   const closeModalHandler = () => {
-    setOpen({
+    setModal({
       employeId: null,
       open: false,
     });
@@ -67,16 +68,20 @@ const Staff = () => {
         birthDate: employeData.birthDate as string,
         department: selectedDepartment as string,
       });
+      toast('сотрудник успешно добавлен');
     } catch (e: any) {
       console.log(e);
+      toast.warn('что-то пошло не так');
     }
   };
 
   const removeEmployeHandler = async (id: string) => {
     try {
       await removeEmploye(id);
+      toast('сотрудник успешно удален');
     } catch (e: any) {
       console.log(e);
+      toast.warn('что-то пошло не так');
     }
   };
 
@@ -84,9 +89,10 @@ const Staff = () => {
     try {
       await editEmploye(employe);
       closeModalHandler();
-      console.log('Succesfully edit contact');
+      toast('изменения сохранены');
     } catch (e: any) {
       console.log(e);
+      toast.warn('что-то пошло не так');
     }
   };
 
@@ -108,13 +114,15 @@ const Staff = () => {
           removeEmployeHandler={removeEmployeHandler}
           openModalHandler={openModalHandler}
         />
-        <AddEditEmployeDialog
-          addEmployeHandler={addEmployeHandler}
-          editEmployeHandler={editEmployeHandler}
-          employeId={open.employeId}
-          onClose={closeModalHandler}
-          open={open.open}
-        />
+        {modal.open && (
+          <AddEditEmployeDialog
+            addEmployeHandler={addEmployeHandler}
+            editEmployeHandler={editEmployeHandler}
+            employeId={modal.employeId}
+            onClose={closeModalHandler}
+            open={modal.open}
+          />
+        )}
       </div>
     );
   } else if (isSuccess && selectedDepartment === 'root') {
