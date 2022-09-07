@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Department } from '../../types/department';
+import { Department, DepartmentFormData } from '../../types/department';
 import { Employe } from '../../types/staff';
 
 type AddNewEmployeQuery = Omit<Employe, 'id'>;
@@ -43,6 +43,14 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Employe'],
     }),
+    editDepartment: builder.mutation({
+      query: (department: Department) => ({
+        url: `/departments/${department.id}`,
+        method: 'PUT',
+        body: department,
+      }),
+      invalidatesTags: ['Department'],
+    }),
     addDepartment: builder.mutation({
       query: (department: Omit<Department, 'id'>) => ({
         url: `/departments/`,
@@ -50,6 +58,9 @@ export const apiSlice = createApi({
         body: department,
       }),
       invalidatesTags: ['Department'],
+    }),
+    getDepartmentById: builder.query<Department, string>({
+      query: (id) => `/departments/${id}`,
     }),
     removeDepartment: builder.mutation({
       query: (id: string) => ({
@@ -70,4 +81,6 @@ export const {
   useGetEmployeByIdQuery,
   useAddDepartmentMutation,
   useRemoveDepartmentMutation,
+  useGetDepartmentByIdQuery,
+  useEditDepartmentMutation,
 } = apiSlice;

@@ -8,6 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import { Employe } from '../../types/staff';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
+import Button from '@mui/material/Button';
 const headings = [
   'ФИО',
   'Дата рождения',
@@ -64,6 +65,8 @@ const StaffTable = ({
                 >
                   <EditIcon sx={{ color: 'green' }} />
                 </IconButton>
+
+                <Button variant="outlined">Изменить отдел</Button>
               </TableCell>
             </TableRow>
           ))}

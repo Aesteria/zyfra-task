@@ -6,6 +6,7 @@ import NavBar from '../components/ui/NavBar';
 import Main from '../components/ui/Main';
 import { Outlet } from 'react-router-dom';
 import DepartmentsTree from '../features/departments/DepartmentsTree';
+import Divider from '@mui/material/Divider';
 
 function HomePage() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -19,6 +20,8 @@ function HomePage() {
       <NavBar handleDrawerToggle={handleDrawerToggle} />
 
       <SideBar handleDrawerToggle={handleDrawerToggle} mobileOpen={mobileOpen}>
+        <Toolbar />
+        <Divider />
         <DepartmentsTree />
       </SideBar>
 

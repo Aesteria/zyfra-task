@@ -7,32 +7,37 @@
     {
       "id": "1",
       "name": "It department",
-      "departmentId": "root"
-    },
-    {
-      "id": "2",
-      "name": "Frontend",
-      "departmentId": "1"
+      "departmentId": "root",
+      "createdAt": "07/09/2022",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
       "id": "3",
       "name": "Backend",
-      "departmentId": "1"
+      "departmentId": "1",
+      "createdAt": "07/09/2022",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
       "id": "4",
       "name": "Отдел тестировщиков",
-      "departmentId": "root"
+      "departmentId": "root",
+      "createdAt": "07/09/2022",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
       "id": "5",
       "name": "E2E Test",
-      "departmentId": "4"
+      "departmentId": "4",
+      "createdAt": "07/09/2022",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
       "id": "6",
       "name": "Unit Testing",
-      "departmentId": "4"
+      "departmentId": "4",
+      "createdAt": "07/09/2022",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     }
   ],
   "staff": [
