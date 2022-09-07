@@ -219,7 +219,7 @@ const AddEditEmployeDialog = ({
               <FormGroup>
                 <FormGroup>
                   <FormControlLabel
-                    control={<Checkbox onChange={onChange} value={value} />}
+                    control={<Checkbox onChange={onChange} checked={value} />}
                     label="Есть водительские права"
                   />
                 </FormGroup>

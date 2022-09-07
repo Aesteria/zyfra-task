@@ -40,142 +40,49 @@
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
-      "description": "donkt now",
-      "createdAt": "2022-09-07T13:25:08.000Z",
-      "name": "C++ GODS",
-      "departmentId": "root",
-      "id": "4sSXBs2"
-    },
-    {
-      "description": "donkt now",
-      "createdAt": "2022-09-07T13:25:08.000Z",
-      "name": "C++ GODS",
-      "departmentId": "root",
-      "id": "vEDTixN"
-    },
-    {
-      "description": "ads",
-      "createdAt": "2022-09-07T13:25:08.000Z",
-      "name": "Локс А.А",
-      "departmentId": "root",
-      "id": "E37KY8q"
-    },
-    {
-      "description": "asd",
-      "createdAt": "2022-09-07T13:43:47.000Z",
-      "name": "ads",
+      "description": "Interfaces & Stuff",
+      "createdAt": "2022-09-07T14:45:02.000Z",
+      "name": "Frontend",
       "departmentId": "1",
-      "id": "AgkINoZ"
+      "id": "1-_H0sG"
     }
   ],
   "staff": [
     {
-      "department": "3",
-      "id": "1",
-      "name": "Aesteria",
-      "birthDate": "1996-02-04T13:26:46.000Z",
-      "driversLicense": false,
-      "position": "Senior Python Developer",
-      "gender": "мужской"
-    },
-    {
-      "birthDate": "2005-02-04T13:26:46.000Z",
-      "position": "Middle React Developer",
-      "gender": "женский",
-      "name": "sadddd",
-      "driversLicense": false,
-      "id": "2",
-      "department": "2"
-    },
-    {
-      "birthDate": "1996-02-04T13:26:46.000Z",
-      "position": "Junior Angular Developer",
-      "gender": "женский",
-      "name": "Alice Doe",
-      "driversLicense": true,
-      "department": "2",
-      "id": "4"
-    },
-    {
-      "birthDate": "1963-02-04T13:26:46.000Z",
-      "position": "Senior Python Developer",
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Senior SQL Expert",
       "gender": "мужской",
       "name": "Aesteria",
       "driversLicense": false,
-      "department": "3",
-      "id": "3RfCs44"
-    },
-    {
-      "birthDate": "1979-02-04T13:26:46.000Z",
-      "position": "saddsasds",
-      "gender": "мужской",
-      "name": "Локс А.А",
-      "driversLicense": true,
-      "department": "3",
-      "id": "IqyZbGC"
-    },
-    {
-      "birthDate": "2001-02-04T13:26:46.000Z",
-      "position": "Рабочий метрополитена",
-      "gender": "мужской",
-      "name": "Локс А.А",
-      "driversLicense": true,
-      "department": "3",
-      "id": "3LoMPss"
-    },
-    {
-      "birthDate": "2000-02-04T13:26:46.000Z",
-      "position": "saddsasds",
-      "gender": "мужской",
-      "name": "Локс А.А",
-      "driversLicense": true,
-      "department": "root",
-      "id": "Z3YcEI0"
-    },
-    {
-      "birthDate": "1993-02-03T21:00:00.000Z",
-      "position": "Рабочий метрополитена",
-      "gender": "мужской",
-      "name": "Локс А.А",
-      "driversLicense": true,
-      "department": "3",
-      "id": "qL-_1Rq"
-    },
-    {
-      "birthDate": "1993-11-17T21:00:00.000Z",
-      "position": "asssssssssss",
-      "gender": "мужской",
-      "name": "ZZZ",
-      "driversLicense": true,
-      "id": "YRQ4mUA",
+      "id": 1,
       "department": "3"
     },
     {
-      "birthDate": "1999-11-10T21:00:00.000Z",
-      "position": "ads",
-      "gender": "мужской",
-      "name": "das",
+      "birthDate": "1989-12-31T21:00:00.000Z",
+      "position": "Junior Backend Engineer",
+      "gender": "женский",
+      "name": "Eleumia",
       "driversLicense": true,
-      "department": "AgkINoZ",
-      "id": "Ui-ILPj"
-    },
-    {
-      "birthDate": "1993-09-01T20:00:00.000Z",
-      "position": "MIDDLE UNREAL ENGINE DEVELOPER",
-      "gender": "мужской",
-      "name": "C++ DEV",
-      "driversLicense": true,
-      "department": "1",
-      "id": "0Men5Ss"
+      "id": 2,
+      "department": "3"
     },
     {
       "birthDate": "1996-01-01T00:00:00.000Z",
-      "position": "saddsasds",
-      "gender": "женский",
-      "name": "Локс А.А",
+      "position": "fasfas",
+      "gender": "мужской",
+      "name": "sad",
       "driversLicense": true,
-      "department": "1",
-      "id": "y9P7sxy"
+      "id": 3,
+      "department": "3"
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "das",
+      "gender": "мужской",
+      "name": "sdads",
+      "driversLicense": false,
+      "id": 4,
+      "department": "3"
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { Department, DepartmentFormData } from '../../types/department';
+import { Department } from '../../types/department';
 import { Employe } from '../../types/staff';
 
 type AddNewEmployeQuery = Omit<Employe, 'id'>;

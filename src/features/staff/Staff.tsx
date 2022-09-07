@@ -18,7 +18,12 @@ type EditModalState = {
 };
 
 const Staff = () => {
-  const { data: staff = [], isSuccess } = useGetStaffQuery();
+  const {
+    data: staff = [],
+    isSuccess,
+    isLoading,
+    isError,
+  } = useGetStaffQuery();
   const [open, setOpen] = useState<EditModalState>({
     employeId: null,
     open: false,
@@ -87,7 +92,7 @@ const Staff = () => {
 
   let content;
 
-  if (isSuccess) {
+  if (isSuccess && selectedDepartment !== 'root') {
     content = (
       <div>
         <Button
@@ -112,11 +117,19 @@ const Staff = () => {
         />
       </div>
     );
-  } else {
-    content = <p>Loading...</p>;
+  } else if (isSuccess && selectedDepartment === 'root') {
+    content = <p>Выберите подразделение</p>;
   }
 
-  return content;
+  if (isLoading) {
+    content = <p>Loading..</p>;
+  }
+
+  if (isError) {
+    content = <p>Ошибка</p>;
+  }
+
+  return <>{content}</>;
 };
 
 export default Staff;
