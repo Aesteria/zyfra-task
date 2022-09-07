@@ -20,7 +20,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import dayjs from 'dayjs';
 import Box from '@mui/material/Box';
 
 type AddEditEmployeDialogProps = {
@@ -79,15 +78,14 @@ const AddEditEmployeDialog = ({
   );
 
   const onSubmit = (data: EmployeFormData) => {
-    const formattedBirthDate = dayjs(data.birthDate).format('DD/MM/YYYY');
     return isAddMode
-      ? addEmployeHandler({ ...data, birthDate: formattedBirthDate })
+      ? addEmployeHandler({ ...data })
       : isSuccess &&
           editEmployeHandler({
             ...data,
             id: employe.id,
             department: employe.department,
-            birthDate: formattedBirthDate,
+            birthDate: data.birthDate as string,
           });
   };
 
@@ -97,15 +95,15 @@ const AddEditEmployeDialog = ({
         'name',
         'gender',
         'position',
-        'birthday',
+        'birthDate',
         'driversLicense',
       ];
-      fields.forEach((field) =>
+      fields.forEach((field) => {
         setValue(
           field as keyof EmployeFormData,
           employe[field as keyof EmployeFormData]
-        )
-      );
+        );
+      });
     }
   }, [employe, isSuccess, setValue]);
 

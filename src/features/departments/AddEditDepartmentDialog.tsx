@@ -14,9 +14,12 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { Controller } from 'react-hook-form';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs from 'dayjs';
 import Box from '@mui/material/Box';
 import { Department, DepartmentFormData } from '../../types/department';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+
+dayjs.locale('ru');
 
 type AddEditDepartmentDialogProps = {
   departmentId: string | null;
@@ -29,7 +32,7 @@ type AddEditDepartmentDialogProps = {
 
 const initialState: DepartmentFormData = {
   name: '',
-  createdAt: dayjs(new Date()).format('DD/MM/YYYY'),
+  createdAt: new Date().toString(),
   description: '',
 };
 
@@ -72,14 +75,12 @@ const AddEditDepartmentDialog = ({
   );
 
   const onSubmit = (data: DepartmentFormData) => {
-    const formattedDate = dayjs(data.createdAt).format('DD/MM/YYYY');
     return isAddMode
-      ? addDepartmentHandler({ ...data, createdAt: formattedDate })
+      ? addDepartmentHandler({ ...data })
       : isSuccess &&
           editDepartmentHandler({
             ...data,
             id: department.id,
-            createdAt: formattedDate,
             departmentId: department.departmentId,
           });
   };
@@ -153,10 +154,7 @@ const AddEditDepartmentDialog = ({
             name="createdAt"
             control={control}
             render={({ field: { onChange, value } }) => (
-              <LocalizationProvider
-                dateAdapter={AdapterDayjs}
-                adapterLocale="ru"
-              >
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DatePicker
                   inputFormat={'DD/MM/YYYY'}
                   label="Дата создания"

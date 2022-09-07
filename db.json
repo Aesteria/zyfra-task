@@ -8,36 +8,57 @@
       "id": "1",
       "name": "It department",
       "departmentId": "root",
-      "createdAt": "07/09/2022",
+      "createdAt": "2022-09-07T13:25:08.000Z",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
       "id": "3",
       "name": "Backend",
       "departmentId": "1",
-      "createdAt": "07/09/2022",
+      "createdAt": "2022-09-07T13:25:08.000Z",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
       "id": "4",
       "name": "Отдел тестировщиков",
       "departmentId": "root",
-      "createdAt": "07/09/2022",
+      "createdAt": "2022-09-07T13:25:08.000Z",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
       "id": "5",
       "name": "E2E Test",
       "departmentId": "4",
-      "createdAt": "07/09/2022",
+      "createdAt": "2022-09-07T13:25:08.000Z",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
     },
     {
       "id": "6",
       "name": "Unit Testing",
       "departmentId": "4",
-      "createdAt": "07/09/2022",
+      "createdAt": "2022-09-07T13:25:08.000Z",
       "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit."
+    },
+    {
+      "description": "donkt now",
+      "createdAt": "2022-09-07T13:25:08.000Z",
+      "name": "C++ GODS",
+      "departmentId": "root",
+      "id": "4sSXBs2"
+    },
+    {
+      "description": "donkt now",
+      "createdAt": "2022-09-07T13:25:08.000Z",
+      "name": "C++ GODS",
+      "departmentId": "root",
+      "id": "vEDTixN"
+    },
+    {
+      "description": "ads",
+      "createdAt": "2022-09-07T13:25:08.000Z",
+      "name": "Локс А.А",
+      "departmentId": "root",
+      "id": "E37KY8q"
     }
   ],
   "staff": [
@@ -45,13 +66,13 @@
       "department": "3",
       "id": "1",
       "name": "Aesteria",
-      "birthDate": "24/09/1990",
+      "birthDate": "1996-02-04T13:26:46.000Z",
       "driversLicense": false,
       "position": "Senior Python Developer",
       "gender": "мужской"
     },
     {
-      "birthDate": "11/11/2001",
+      "birthDate": "2005-02-04T13:26:46.000Z",
       "position": "Middle React Developer",
       "gender": "женский",
       "name": "sadddd",
@@ -60,13 +81,58 @@
       "department": "2"
     },
     {
-      "birthDate": "22/09/2022",
+      "birthDate": "1996-02-04T13:26:46.000Z",
       "position": "Junior Angular Developer",
       "gender": "женский",
       "name": "Alice Doe",
       "driversLicense": true,
       "department": "2",
       "id": "4"
+    },
+    {
+      "birthDate": "1963-02-04T13:26:46.000Z",
+      "position": "Senior Python Developer",
+      "gender": "мужской",
+      "name": "Aesteria",
+      "driversLicense": false,
+      "department": "3",
+      "id": "3RfCs44"
+    },
+    {
+      "birthDate": "1979-02-04T13:26:46.000Z",
+      "position": "saddsasds",
+      "gender": "мужской",
+      "name": "Локс А.А",
+      "driversLicense": true,
+      "department": "3",
+      "id": "IqyZbGC"
+    },
+    {
+      "birthDate": "2001-02-04T13:26:46.000Z",
+      "position": "Рабочий метрополитена",
+      "gender": "мужской",
+      "name": "Локс А.А",
+      "driversLicense": true,
+      "department": "3",
+      "id": "3LoMPss"
+    },
+    {
+      "birthDate": "2000-02-04T13:26:46.000Z",
+      "position": "saddsasds",
+      "gender": "мужской",
+      "name": "Локс А.А",
+      "driversLicense": true,
+      "department": "root",
+      "id": "Z3YcEI0"
+    },
+    {
+      "birthDate": "1993-02-03T21:00:00.000Z",
+      "position": "Рабочий метрополитена",
+      "gender": "мужской",
+      "name": "Локс А.А",
+      "driversLicense": true,
+      "department": "3",
+      "id": "qL-_1Rq"
     }
   ]
 }

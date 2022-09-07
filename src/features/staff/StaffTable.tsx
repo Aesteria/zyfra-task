@@ -9,6 +9,7 @@ import { Employe } from '../../types/staff';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import Button from '@mui/material/Button';
+import dayjs from 'dayjs';
 const headings = [
   'ФИО',
   'Дата рождения',
@@ -22,6 +23,8 @@ type StaffTableProps = {
   removeEmployeHandler: (id: string) => Promise<void>;
   openModalHandler: (id?: string) => void;
 };
+
+// const formattedBirthDate = dayjs(data.birthDate).format('DD/MM/YYYY');
 
 const StaffTable = ({
   staff,
@@ -47,7 +50,9 @@ const StaffTable = ({
               <TableCell component="th" scope="row">
                 {employe.name}
               </TableCell>
-              <TableCell>{employe.birthDate}</TableCell>
+              <TableCell>
+                {dayjs(employe.birthDate).format('DD/MM/YYYY')}
+              </TableCell>
               <TableCell>{employe.gender}</TableCell>
               <TableCell>{employe.position}</TableCell>
               <TableCell>{employe.driversLicense ? 'есть' : 'нет'}</TableCell>
