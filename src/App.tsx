@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Staff from './features/staff/Staff';
 import HomePage from './pages/Home';
 
 const App = () => {
@@ -7,9 +6,7 @@ const App = () => {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />}>
-            <Route path="/departments/:departmentId" element={<Staff />} />
-          </Route>
+          <Route path="/" element={<HomePage />} />
         </Routes>
       </BrowserRouter>
     </>

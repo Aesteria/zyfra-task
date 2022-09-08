@@ -9,9 +9,9 @@ import {
   useGetStaffQuery,
   useRemoveEmployeeMutation,
 } from '../api/api';
-import { useParams } from 'react-router-dom';
 import AddEditEmployeDialog from './AddEditEmployeDialog';
 import { toast } from 'react-toastify';
+import { useAppSelector } from '../../app/hooks';
 
 type EditModalState = {
   employeId: string | null;
@@ -32,9 +32,9 @@ const Staff = () => {
   const [addEmploye] = useAddNewEmployeMutation();
   const [removeEmploye] = useRemoveEmployeeMutation();
   const [editEmploye] = useEditEmployeeMutation();
-  const { departmentId: selectedDepartment } = useParams<{
-    departmentId: string;
-  }>();
+  const selectedDepartment = useAppSelector(
+    (state) => state.departments.selected
+  );
 
   const staffFiltered = useMemo(() => {
     return staff.filter((item) => item.departmentId === selectedDepartment);
@@ -97,8 +97,12 @@ const Staff = () => {
   };
 
   let content;
+  const showTable =
+    isSuccess && selectedDepartment && selectedDepartment !== 'root';
+  const showPrompt =
+    isSuccess && (!selectedDepartment || selectedDepartment === 'root');
 
-  if (isSuccess && selectedDepartment !== 'root') {
+  if (showTable) {
     content = (
       <div>
         <Button
@@ -125,7 +129,7 @@ const Staff = () => {
         )}
       </div>
     );
-  } else if (isSuccess && selectedDepartment === 'root') {
+  } else if (showPrompt) {
     content = <p>Выберите подразделение</p>;
   }
 

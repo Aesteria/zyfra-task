@@ -3,7 +3,101 @@
     {
       "id": "root",
       "name": "Root"
+    },
+    {
+      "description": "Frontend stuff",
+      "createdAt": "2022-09-08T13:48:52.000Z",
+      "name": "Frontend",
+      "departmentId": "root",
+      "id": "70yeI2X"
+    },
+    {
+      "description": "Backend stuff",
+      "createdAt": "2022-09-08T13:48:52.000Z",
+      "name": "Backend ",
+      "departmentId": "root",
+      "id": "KYHaa3f"
+    },
+    {
+      "description": "dascasc",
+      "createdAt": "2022-09-08T14:12:05.000Z",
+      "name": "s",
+      "id": "mOJFzoN",
+      "departmentId": "root"
     }
   ],
-  "staff": []
+  "staff": [
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Senior Engineer",
+      "gender": "мужской",
+      "name": "John Doe",
+      "driversLicense": true,
+      "departmentId": "70yeI2X",
+      "id": 1
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Senior Engineer",
+      "gender": "мужской",
+      "name": "John Doe",
+      "driversLicense": true,
+      "departmentId": "70yeI2X",
+      "id": 3
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Senior Engineer",
+      "gender": "мужской",
+      "name": "John Doe",
+      "driversLicense": true,
+      "departmentId": "70yeI2X",
+      "id": 4
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Senior Engineer",
+      "gender": "мужской",
+      "name": "John Doe",
+      "driversLicense": true,
+      "departmentId": "70yeI2X",
+      "id": 5
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Junior Engineer",
+      "gender": "женский",
+      "name": "Aesteria",
+      "driversLicense": true,
+      "departmentId": "KYHaa3f",
+      "id": 7
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Junior Engineer",
+      "gender": "женский",
+      "name": "Aesteria",
+      "driversLicense": true,
+      "departmentId": "KYHaa3f",
+      "id": 8
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Junior Engineer",
+      "gender": "женский",
+      "name": "Aesteria",
+      "driversLicense": true,
+      "departmentId": "KYHaa3f",
+      "id": 9
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Junior Engineer",
+      "gender": "женский",
+      "name": "Aesteria",
+      "driversLicense": true,
+      "departmentId": "KYHaa3f",
+      "id": 10
+    }
+  ]
 }

@@ -4,9 +4,9 @@ import Toolbar from '@mui/material/Toolbar';
 import SideBar from '../components/ui/SideBar';
 import NavBar from '../components/ui/NavBar';
 import Main from '../components/ui/Main';
-import { Outlet } from 'react-router-dom';
 import DepartmentsTree from '../features/departments/DepartmentsTree';
 import Divider from '@mui/material/Divider';
+import Staff from '../features/staff/Staff';
 
 function HomePage() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -27,7 +27,7 @@ function HomePage() {
 
       <Main>
         <Toolbar />
-        <Outlet />
+        <Staff />
       </Main>
     </Box>
   );

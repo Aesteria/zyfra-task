@@ -8,7 +8,6 @@ import {
   useGetDepartmentsQuery,
   useRemoveDepartmentMutation,
 } from '../api/api';
-import { useNavigate } from 'react-router-dom';
 import Typography from '@mui/material/Typography';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -18,6 +17,8 @@ import React, { SyntheticEvent, useCallback, useState } from 'react';
 import AddEditDepartmentDialog from './AddEditDepartmentDialog';
 import { toast } from 'react-toastify';
 import IconButton from '@mui/material/IconButton';
+import { useAppDispatch } from '../../app/hooks';
+import { selectDepartment } from './departmentsSlice';
 
 type EditModalState = {
   departmentId: string | null;
@@ -35,8 +36,7 @@ const DepartmentsTree = () => {
     open: false,
     isEdit: false,
   });
-  const [selected, setSelected] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const openModalHandler = (id: string, edit: boolean) => {
     if (id) {
@@ -103,7 +103,6 @@ const DepartmentsTree = () => {
       try {
         await removeDepartment(id);
         toast.success('Подразделение успешно удалено');
-        navigate('/departments/root');
       } catch (e) {
         console.log(e);
         toast.warn('что-то пошло не так');
@@ -126,11 +125,6 @@ const DepartmentsTree = () => {
       const filtered = nodes.filter((node) => node.departmentId === parentId);
       return filtered.map((node) => (
         <TreeItem
-          onClick={() => {
-            if (selected !== node.id) {
-              navigate(`/departments/${node.id}`);
-            }
-          }}
           key={node.id}
           nodeId={node.id.toString()}
           label={
@@ -174,17 +168,12 @@ const DepartmentsTree = () => {
         defaultExpandIcon={<ChevronRightIcon />}
         sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
         onNodeSelect={(event: SyntheticEvent, nodeId: string) => {
-          setSelected(nodeId);
+          dispatch(selectDepartment(nodeId));
         }}
       >
         {isSuccess && (
           <TreeItem
             nodeId="root"
-            onClick={() => {
-              if (selected !== 'root') {
-                navigate('/departments/root');
-              }
-            }}
             label={
               <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Typography sx={{ marginRight: '10px' }}>
