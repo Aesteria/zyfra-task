@@ -69,7 +69,7 @@ export const apiSlice = createApi({
         url: `/departments/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: ['Department'],
+      invalidatesTags: ['Department', 'Employe'],
     }),
   }),
 });

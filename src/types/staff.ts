@@ -5,7 +5,7 @@ export type Employe = {
   position: string;
   driversLicense: boolean;
   id: string;
-  department: string;
+  departmentId: string;
 };
 
 export type EmployeFormData = {

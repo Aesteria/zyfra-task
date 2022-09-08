@@ -103,6 +103,7 @@ const DepartmentsTree = () => {
       try {
         await removeDepartment(id);
         toast.success('Подразделение успешно удалено');
+        navigate('/departments/root');
       } catch (e) {
         console.log(e);
         toast.warn('что-то пошло не так');

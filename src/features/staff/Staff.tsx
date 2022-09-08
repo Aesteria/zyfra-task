@@ -37,7 +37,7 @@ const Staff = () => {
   }>();
 
   const staffFiltered = useMemo(() => {
-    return staff.filter((item: any) => item.department === selectedDepartment);
+    return staff.filter((item) => item.departmentId === selectedDepartment);
   }, [staff, selectedDepartment]);
 
   const openModalHandler = (id?: string) => {
@@ -66,7 +66,7 @@ const Staff = () => {
       await addEmploye({
         ...employeData,
         birthDate: employeData.birthDate as string,
-        department: selectedDepartment as string,
+        departmentId: selectedDepartment as string,
       });
       toast('сотрудник успешно добавлен');
     } catch (e: any) {

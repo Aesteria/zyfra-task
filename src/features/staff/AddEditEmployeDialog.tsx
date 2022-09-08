@@ -83,7 +83,7 @@ const AddEditEmployeDialog = ({
           editEmployeHandler({
             ...data,
             id: employe.id,
-            department: employe.department,
+            departmentId: employe.departmentId,
             birthDate: data.birthDate,
           });
   };
