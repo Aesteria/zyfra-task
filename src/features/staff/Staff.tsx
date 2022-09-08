@@ -6,12 +6,14 @@ import StaffTable from './StaffTable';
 import {
   useAddNewEmployeMutation,
   useEditEmployeeMutation,
+  useGetDepartmentByIdQuery,
   useGetStaffQuery,
   useRemoveEmployeeMutation,
 } from '../api/api';
 import AddEditEmployeDialog from './AddEditEmployeDialog';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../app/hooks';
+import Typography from '@mui/material/Typography';
 
 type EditModalState = {
   employeId: string | null;
@@ -34,6 +36,12 @@ const Staff = () => {
   const [editEmploye] = useEditEmployeeMutation();
   const selectedDepartment = useAppSelector(
     (state) => state.departments.selected
+  );
+  const { data: department } = useGetDepartmentByIdQuery(
+    selectedDepartment as string,
+    {
+      skip: selectedDepartment === 'root' || selectedDepartment === null,
+    }
   );
 
   const staffFiltered = useMemo(() => {
@@ -105,13 +113,19 @@ const Staff = () => {
   if (showTable) {
     content = (
       <div>
+        <Typography variant="h5" component="h2">
+          Название отдела: {department?.name}
+        </Typography>
+        <Typography sx={{ marginBottom: '25px' }}>
+          Описание: {department?.description}
+        </Typography>
         <Button
           variant="contained"
           startIcon={<AddCircleIcon />}
           size="large"
           onClick={() => openModalHandler()}
         >
-          Добавить работника
+          Добавить сотрудника
         </Button>
         <StaffTable
           staff={staffFiltered}

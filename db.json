@@ -5,25 +5,18 @@
       "name": "Root"
     },
     {
-      "description": "Frontend stuff",
+      "description": "Lorem ipsum dorem frontend",
       "createdAt": "2022-09-08T13:48:52.000Z",
       "name": "Frontend",
-      "departmentId": "root",
-      "id": "70yeI2X"
+      "id": "70yeI2X",
+      "departmentId": "root"
     },
     {
-      "description": "Backend stuff",
+      "description": "Lorem ipsum dorem backend",
       "createdAt": "2022-09-08T13:48:52.000Z",
-      "name": "Backend ",
+      "name": "Backend",
       "departmentId": "root",
       "id": "KYHaa3f"
-    },
-    {
-      "description": "dascasc",
-      "createdAt": "2022-09-08T14:12:05.000Z",
-      "name": "s",
-      "id": "mOJFzoN",
-      "departmentId": "root"
     }
   ],
   "staff": [
@@ -40,10 +33,10 @@
       "birthDate": "1996-01-01T00:00:00.000Z",
       "position": "Senior Engineer",
       "gender": "мужской",
-      "name": "John Doe",
+      "name": "xd",
       "driversLicense": true,
-      "departmentId": "70yeI2X",
-      "id": 3
+      "id": 3,
+      "departmentId": "70yeI2X"
     },
     {
       "birthDate": "1996-01-01T00:00:00.000Z",

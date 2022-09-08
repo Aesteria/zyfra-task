@@ -173,9 +173,13 @@ const DepartmentsTree = () => {
       >
         {isSuccess && (
           <TreeItem
+            onFocusCapture={(e) => e.preventDefault()}
             nodeId="root"
             label={
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div
+                style={{ display: 'flex', alignItems: 'center' }}
+                draggable="true"
+              >
                 <Typography sx={{ marginRight: '10px' }}>
                   Подразделения
                 </Typography>
