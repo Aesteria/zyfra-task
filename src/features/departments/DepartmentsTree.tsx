@@ -17,6 +17,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import React, { SyntheticEvent, useCallback, useState } from 'react';
 import AddEditDepartmentDialog from './AddEditDepartmentDialog';
 import { toast } from 'react-toastify';
+import IconButton from '@mui/material/IconButton';
 
 type EditModalState = {
   departmentId: string | null;
@@ -85,6 +86,40 @@ const DepartmentsTree = () => {
     }
   };
 
+  const addClickHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string
+  ) => {
+    e.stopPropagation();
+    openModalHandler(id, false);
+  };
+
+  const deleteClickHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string
+  ) => {
+    e.stopPropagation();
+    const removeDep = async () => {
+      try {
+        await removeDepartment(id);
+        toast.success('Подразделение успешно удалено');
+      } catch (e) {
+        console.log(e);
+        toast.warn('что-то пошло не так');
+      }
+    };
+
+    removeDep();
+  };
+
+  const editClickHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string
+  ) => {
+    e.stopPropagation();
+    openModalHandler(id, true);
+  };
+
   const renderTree = (nodes: Department[], parentId: string) => {
     if (isSuccess) {
       const filtered = nodes.filter((node) => node.departmentId === parentId);
@@ -98,36 +133,29 @@ const DepartmentsTree = () => {
           key={node.id}
           nodeId={node.id.toString()}
           label={
-            <div style={{ display: 'flex' }}>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
               <Typography sx={{ marginRight: '10px' }}>{node.name}</Typography>
-              <AddBoxIcon
-                onClick={(e) => {
-                  e.stopPropagation();
-                  openModalHandler(node.id, false);
-                }}
-              />
-              <DeleteIcon
-                onClick={(e) => {
-                  e.stopPropagation();
-                  const removeDep = async () => {
-                    try {
-                      await removeDepartment(node.id);
-                      toast.success('Подразделение успешно удалено');
-                    } catch (e) {
-                      console.log(e);
-                      toast.warn('что-то пошло не так');
-                    }
-                  };
-
-                  removeDep();
-                }}
-              />
-              <EditIcon
-                onClick={(e) => {
-                  e.stopPropagation();
-                  openModalHandler(node.id, true);
-                }}
-              />
+              <IconButton
+                aria-label="add"
+                size="small"
+                onClick={(e) => addClickHandler(e, node.id)}
+              >
+                <AddBoxIcon sx={{ color: '#1976d2' }} />
+              </IconButton>
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={(e) => deleteClickHandler(e, node.id)}
+              >
+                <DeleteIcon sx={{ color: '#FC3400' }} />
+              </IconButton>
+              <IconButton
+                aria-label="edit"
+                size="small"
+                onClick={(e) => editClickHandler(e, node.id)}
+              >
+                <EditIcon sx={{ color: '#2E2C34' }} />
+              </IconButton>
             </div>
           }
         >
@@ -157,16 +185,17 @@ const DepartmentsTree = () => {
               }
             }}
             label={
-              <div style={{ display: 'flex' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Typography sx={{ marginRight: '10px' }}>
                   Подразделения
                 </Typography>
-                <AddBoxIcon
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    openModalHandler('root', false);
-                  }}
-                />
+                <IconButton
+                  aria-label="add"
+                  size="small"
+                  onClick={(e) => addClickHandler(e, 'root')}
+                >
+                  <AddBoxIcon sx={{ color: '#1976d2' }} />
+                </IconButton>
               </div>
             }
           >

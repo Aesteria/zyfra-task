@@ -63,8 +63,7 @@ const AddEditEmployeDialog = ({
     handleSubmit,
     control,
     setValue,
-    formState: { errors, isSubmitSuccessful },
-    reset,
+    formState: { errors },
   } = useForm<EmployeFormData>({
     resolver: yupResolver(validationSchema),
     defaultValues: initialState,
@@ -107,17 +106,10 @@ const AddEditEmployeDialog = ({
     }
   }, [employe, isSuccess, setValue]);
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      // reset(initialState);
-    }
-  }, [isSubmitSuccessful, reset]);
-
   return (
     <Dialog
       onClose={() => {
         onClose();
-        // reset(initialState);
       }}
       open={open}
     >

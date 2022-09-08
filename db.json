@@ -96,6 +96,60 @@
       "driversLicense": true,
       "department": "1",
       "id": 8
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Junior FE engineer",
+      "gender": "женский",
+      "name": "Alex S.A",
+      "driversLicense": true,
+      "department": "Xo4krWb",
+      "id": 9
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Junior Python Developer",
+      "gender": "мужской",
+      "name": "Senecia A.A",
+      "driversLicense": true,
+      "department": "i-VOF5A",
+      "id": 10
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Junior SQL Developer",
+      "gender": "мужской",
+      "name": "Eleum Loyce",
+      "driversLicense": false,
+      "department": "i-VOF5A",
+      "id": 11
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "saddsasds",
+      "gender": "мужской",
+      "name": "aa",
+      "driversLicense": false,
+      "department": "4",
+      "id": 12
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "saddsasds",
+      "gender": "мужской",
+      "name": "aa",
+      "driversLicense": false,
+      "department": "4",
+      "id": 13
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "saddsasds",
+      "gender": "мужской",
+      "name": "aa",
+      "driversLicense": false,
+      "department": "4",
+      "id": 14
     }
   ]
 }
