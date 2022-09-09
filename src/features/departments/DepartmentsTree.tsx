@@ -138,25 +138,26 @@ const DepartmentsTree = () => {
   };
 
   const dragEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    console.log(e.target);
     const target = e.target as HTMLDivElement;
     target.style.background = '';
   };
 
   const dropHandler = (e: React.DragEvent<HTMLDivElement>, nodeId: string) => {
-    console.log('drop', e.target);
     e.preventDefault();
-    const target = e.target as HTMLDivElement;
+    let target = e.target as HTMLDivElement;
+
+    // if target is nested change target to parent
+    if (!target.id) {
+      target = target.parentElement as HTMLDivElement;
+    }
+
+    // if target is the same as draggable item return immediately
     if (target.id === currentTreeItem?.id) {
       return;
     }
 
-    if (!target.id) {
-      const parent = target.parentElement as HTMLDivElement;
-      parent.style.background = '';
-    } else {
-      target.style.background = '';
-    }
+    // change background to default after drop
+    target.style.background = '';
 
     const isCurrentItemAndNotSameParent =
       currentTreeItem && currentTreeItem.departmentId !== nodeId;
@@ -170,18 +171,18 @@ const DepartmentsTree = () => {
 
   const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const target = e.target as HTMLDivElement;
+    let target = e.target as HTMLDivElement;
+
+    // if target is nested change target to parent
+    if (!target.id) {
+      target = target.parentElement as HTMLDivElement;
+    }
+
     if (target.id === currentTreeItem?.id) {
       return;
     }
 
-    // if target element is nested change parentElement background
-    if (!target.id) {
-      const parent = target.parentElement as HTMLDivElement;
-      parent.style.background = 'rgb(25, 118, 210, 0.4)';
-    } else {
-      target.style.background = 'rgb(25, 118, 210, 0.4)';
-    }
+    target.style.background = 'rgb(25, 118, 210, 0.4)';
   };
 
   const renderTree = (nodes: Department[], parentId: string) => {
