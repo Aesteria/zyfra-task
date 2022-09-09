@@ -37,10 +37,12 @@ const Staff = () => {
   const selectedDepartment = useAppSelector(
     (state) => state.departments.selected
   );
+
   const { data: department } = useGetDepartmentByIdQuery(
     selectedDepartment as string,
     {
-      skip: selectedDepartment === 'root' || selectedDepartment === null,
+      skip:
+        selectedDepartment === 'rootDepartments' || selectedDepartment === null,
     }
   );
 
@@ -106,9 +108,10 @@ const Staff = () => {
 
   let content;
   const showTable =
-    isSuccess && selectedDepartment && selectedDepartment !== 'root';
+    isSuccess && selectedDepartment && selectedDepartment !== 'rootDepartments';
   const showPrompt =
-    isSuccess && (!selectedDepartment || selectedDepartment === 'root');
+    isSuccess &&
+    (!selectedDepartment || selectedDepartment === 'rootDepartments');
 
   if (showTable) {
     content = (

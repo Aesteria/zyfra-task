@@ -106,6 +106,7 @@ const DepartmentsTree = () => {
     e.stopPropagation();
     const removeDep = async () => {
       try {
+        dispatch(selectDepartment(null));
         await removeDepartment(id);
         toast.success('Подразделение успешно удалено');
       } catch (e) {
@@ -133,12 +134,24 @@ const DepartmentsTree = () => {
   };
 
   const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLDivElement;
+    let target = e.target as HTMLDivElement;
+
+    // if target is nested change target to parent
+    if (!target.id) {
+      target = target.parentElement as HTMLDivElement;
+    }
+
     target.style.background = '';
   };
 
   const dragEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    const target = e.target as HTMLDivElement;
+    let target = e.target as HTMLDivElement;
+
+    // if target is nested change target to parent
+    if (!target.id) {
+      target = target.parentElement as HTMLDivElement;
+    }
+
     target.style.background = '';
   };
 
@@ -249,7 +262,7 @@ const DepartmentsTree = () => {
         {isSuccess && (
           <TreeItem
             onFocusCapture={(e) => e.stopPropagation()}
-            nodeId="root"
+            nodeId="rootDepartments"
             sx={{ userSelect: 'none' }}
             label={
               <div
@@ -259,9 +272,9 @@ const DepartmentsTree = () => {
                 }}
                 onDragLeave={(e) => dragLeaveHandler(e)}
                 onDragEnd={(e) => dragEndHandler(e)}
-                onDrop={(e) => dropHandler(e, 'root')}
+                onDrop={(e) => dropHandler(e, 'rootDepartments')}
                 onDragOver={(e) => dragOverHandler(e)}
-                id="root"
+                id="rootDepartments"
               >
                 <Typography sx={{ marginRight: '10px' }}>
                   Подразделения
@@ -269,14 +282,16 @@ const DepartmentsTree = () => {
                 <IconButton
                   aria-label="add"
                   size="small"
-                  onClick={(e) => addClickHandler(e, 'root')}
+                  onClick={(e) => addClickHandler(e, 'rootDepartments')}
                 >
-                  <AddBoxIcon sx={{ color: '#1976d2' }} />
+                  <AddBoxIcon
+                    sx={{ color: '#1976d2', pointerEvents: 'none' }}
+                  />
                 </IconButton>
               </div>
             }
           >
-            {renderTree(departments, 'root')}
+            {renderTree(departments, 'rootDepartments')}
           </TreeItem>
         )}
       </TreeView>

@@ -12,7 +12,7 @@ const departmentsSlice = createSlice({
   name: 'staff',
   initialState,
   reducers: {
-    selectDepartment(state: State, { payload }: { payload: string }) {
+    selectDepartment(state: State, { payload }: { payload: string | null }) {
       state.selected = payload;
     },
   },

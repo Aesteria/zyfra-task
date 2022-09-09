@@ -1,41 +1,25 @@
 {
   "departments": [
     {
-      "id": "root",
-      "name": "Root"
+      "id": "rootDepartments",
+      "name": "Подразделения"
     },
     {
       "description": "Lorem ipsum dorem frontend",
       "createdAt": "2022-09-08T13:48:52.000Z",
       "name": "Frontend",
       "id": "70yeI2X",
-      "departmentId": "root"
+      "departmentId": "rootDepartments"
     },
     {
       "description": "Lorem ipsum dorem backend",
       "createdAt": "2022-09-08T13:48:52.000Z",
       "name": "Backend",
-      "departmentId": "root",
+      "departmentId": "rootDepartments",
       "id": "KYHaa3f"
-    },
-    {
-      "description": "ddsdas",
-      "createdAt": "2022-09-09T08:48:46.000Z",
-      "name": "xdd",
-      "departmentId": "root",
-      "id": "AwqPBx-"
     }
   ],
   "staff": [
-    {
-      "birthDate": "1996-01-01T00:00:00.000Z",
-      "position": "Senior Engineer",
-      "gender": "мужской",
-      "name": "John Doe",
-      "driversLicense": true,
-      "departmentId": "70yeI2X",
-      "id": 1
-    },
     {
       "birthDate": "1996-01-01T00:00:00.000Z",
       "position": "Senior Engineer",
@@ -44,15 +28,6 @@
       "driversLicense": true,
       "id": 3,
       "departmentId": "70yeI2X"
-    },
-    {
-      "birthDate": "1996-01-01T00:00:00.000Z",
-      "position": "Senior Engineer",
-      "gender": "мужской",
-      "name": "John Doe",
-      "driversLicense": true,
-      "departmentId": "70yeI2X",
-      "id": 4
     },
     {
       "birthDate": "1996-01-01T00:00:00.000Z",
@@ -98,33 +73,6 @@
       "driversLicense": true,
       "departmentId": "KYHaa3f",
       "id": 10
-    },
-    {
-      "birthDate": "1996-01-01T00:00:00.000Z",
-      "position": "dsadas",
-      "gender": "мужской",
-      "name": "dsa",
-      "driversLicense": true,
-      "departmentId": "AwqPBx-",
-      "id": 11
-    },
-    {
-      "birthDate": "1996-01-01T00:00:00.000Z",
-      "position": "dsadas",
-      "gender": "мужской",
-      "name": "dsa",
-      "driversLicense": true,
-      "departmentId": "AwqPBx-",
-      "id": 12
-    },
-    {
-      "birthDate": "1996-01-01T00:00:00.000Z",
-      "position": "dsadas",
-      "gender": "мужской",
-      "name": "dsa",
-      "driversLicense": true,
-      "departmentId": "AwqPBx-",
-      "id": 13
     }
   ]
 }
