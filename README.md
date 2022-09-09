@@ -8,5 +8,14 @@
 - Подразделение имеет след. поля: Наименование, Дата формирования, Описание.
 - Работник имеет след. поля: ФИО, Дата рождения, Пол, Должность, Наличие водительских прав.
 
-- run json server
-  "json-server --watch db.json --port 3004"
+## Available Scripts
+
+### `npm start`
+
+Запуск frontend-приложения
+Откройте [http://localhost:3000](http://localhost:3000) в браузере
+
+### `npm run dev`
+
+Запуск backend приложения с помощью json-server
+[http://localhost:3004](http://localhost:3004)

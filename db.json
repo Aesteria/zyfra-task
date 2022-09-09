@@ -17,6 +17,13 @@
       "name": "Backend",
       "departmentId": "root",
       "id": "KYHaa3f"
+    },
+    {
+      "description": "ddsdas",
+      "createdAt": "2022-09-09T08:48:46.000Z",
+      "name": "xdd",
+      "departmentId": "KYHaa3f",
+      "id": "AwqPBx-"
     }
   ],
   "staff": [
@@ -91,6 +98,33 @@
       "driversLicense": true,
       "departmentId": "KYHaa3f",
       "id": 10
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "dsadas",
+      "gender": "мужской",
+      "name": "dsa",
+      "driversLicense": true,
+      "departmentId": "AwqPBx-",
+      "id": 11
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "dsadas",
+      "gender": "мужской",
+      "name": "dsa",
+      "driversLicense": true,
+      "departmentId": "AwqPBx-",
+      "id": 12
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "dsadas",
+      "gender": "мужской",
+      "name": "dsa",
+      "driversLicense": true,
+      "departmentId": "AwqPBx-",
+      "id": 13
     }
   ]
 }

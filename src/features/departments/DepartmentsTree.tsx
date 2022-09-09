@@ -4,6 +4,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   useAddDepartmentMutation,
+  useChangeDepartmentOrderMutation,
   useEditDepartmentMutation,
   useGetDepartmentsQuery,
   useRemoveDepartmentMutation,
@@ -37,6 +38,10 @@ const DepartmentsTree = () => {
     isEdit: false,
   });
   const dispatch = useAppDispatch();
+  const [currentTreeItem, setCurrentTreeItem] = useState<Department | null>(
+    null
+  );
+  const [changeDepartment] = useChangeDepartmentOrderMutation();
 
   const openModalHandler = (id: string, edit: boolean) => {
     if (id) {
@@ -120,36 +125,105 @@ const DepartmentsTree = () => {
     openModalHandler(id, true);
   };
 
+  const dragStartHandler = (
+    e: React.DragEvent<HTMLDivElement>,
+    node: Department
+  ) => {
+    setCurrentTreeItem(node);
+  };
+
+  const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    const target = e.target as HTMLDivElement;
+    target.style.background = '';
+  };
+
+  const dragEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    console.log(e.target);
+    const target = e.target as HTMLDivElement;
+    target.style.background = '';
+  };
+
+  const dropHandler = (e: React.DragEvent<HTMLDivElement>, nodeId: string) => {
+    console.log('drop', e.target);
+    e.preventDefault();
+    const target = e.target as HTMLDivElement;
+    if (target.id === currentTreeItem?.id) {
+      return;
+    }
+
+    if (!target.id) {
+      const parent = target.parentElement as HTMLDivElement;
+      parent.style.background = '';
+    } else {
+      target.style.background = '';
+    }
+
+    const isCurrentItemAndNotSameParent =
+      currentTreeItem && currentTreeItem.departmentId !== nodeId;
+    if (isCurrentItemAndNotSameParent) {
+      changeDepartment({
+        ...currentTreeItem,
+        departmentId: nodeId,
+      });
+    }
+  };
+
+  const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const target = e.target as HTMLDivElement;
+    if (target.id === currentTreeItem?.id) {
+      return;
+    }
+
+    // if target element is nested change parentElement background
+    if (!target.id) {
+      const parent = target.parentElement as HTMLDivElement;
+      parent.style.background = 'rgb(25, 118, 210, 0.4)';
+    } else {
+      target.style.background = 'rgb(25, 118, 210, 0.4)';
+    }
+  };
+
   const renderTree = (nodes: Department[], parentId: string) => {
     if (isSuccess) {
       const filtered = nodes.filter((node) => node.departmentId === parentId);
       return filtered.map((node) => (
         <TreeItem
+          onFocusCapture={(e) => e.stopPropagation()}
           key={node.id}
           nodeId={node.id.toString()}
           label={
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div
+              id={node.id}
+              draggable
+              style={{ display: 'flex', alignItems: 'center' }}
+              onDragStart={(e) => dragStartHandler(e, node)}
+              onDragLeave={(e) => dragLeaveHandler(e)}
+              onDragEnd={(e) => dragEndHandler(e)}
+              onDrop={(e) => dropHandler(e, node.id)}
+              onDragOver={(e) => dragOverHandler(e)}
+            >
               <Typography sx={{ marginRight: '10px' }}>{node.name}</Typography>
               <IconButton
                 aria-label="add"
                 size="small"
                 onClick={(e) => addClickHandler(e, node.id)}
               >
-                <AddBoxIcon sx={{ color: '#1976d2' }} />
+                <AddBoxIcon sx={{ color: '#1976d2', pointerEvents: 'none' }} />
               </IconButton>
               <IconButton
                 aria-label="delete"
                 size="small"
                 onClick={(e) => deleteClickHandler(e, node.id)}
               >
-                <DeleteIcon sx={{ color: '#FC3400' }} />
+                <DeleteIcon sx={{ color: '#FC3400', pointerEvents: 'none' }} />
               </IconButton>
               <IconButton
                 aria-label="edit"
                 size="small"
                 onClick={(e) => editClickHandler(e, node.id)}
               >
-                <EditIcon sx={{ color: '#2E2C34' }} />
+                <EditIcon sx={{ color: '#2E2C34', pointerEvents: 'none' }} />
               </IconButton>
             </div>
           }
@@ -173,12 +247,20 @@ const DepartmentsTree = () => {
       >
         {isSuccess && (
           <TreeItem
-            onFocusCapture={(e) => e.preventDefault()}
+            onFocusCapture={(e) => e.stopPropagation()}
             nodeId="root"
+            sx={{ userSelect: 'none' }}
             label={
               <div
-                style={{ display: 'flex', alignItems: 'center' }}
-                draggable="true"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+                onDragLeave={(e) => dragLeaveHandler(e)}
+                onDragEnd={(e) => dragEndHandler(e)}
+                onDrop={(e) => dropHandler(e, 'root')}
+                onDragOver={(e) => dragOverHandler(e)}
+                id="root"
               >
                 <Typography sx={{ marginRight: '10px' }}>
                   Подразделения
