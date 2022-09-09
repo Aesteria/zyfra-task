@@ -5,6 +5,7 @@ import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   useAddDepartmentMutation,
   useChangeDepartmentOrderMutation,
+  useChangeEmployeDepartmentMutation,
   useEditDepartmentMutation,
   useGetDepartmentsQuery,
   useRemoveDepartmentMutation,
@@ -18,8 +19,10 @@ import React, { SyntheticEvent, useCallback, useState } from 'react';
 import AddEditDepartmentDialog from './AddEditDepartmentDialog';
 import { toast } from 'react-toastify';
 import IconButton from '@mui/material/IconButton';
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectDepartment } from './departmentsSlice';
+import { Employe } from '../../types/staff';
+import { changeDragEmploye } from '../staff/staffSlice';
 
 type EditModalState = {
   departmentId: string | null;
@@ -41,7 +44,11 @@ const DepartmentsTree = () => {
   const [currentTreeItem, setCurrentTreeItem] = useState<Department | null>(
     null
   );
+  const currentDragEmploye = useAppSelector(
+    (state) => state.staff.currentDragEmploye
+  );
   const [changeDepartment] = useChangeDepartmentOrderMutation();
+  const [changeEmployeDepartment] = useChangeEmployeDepartmentMutation();
 
   const openModalHandler = (id: string, edit: boolean) => {
     if (id) {
@@ -135,12 +142,10 @@ const DepartmentsTree = () => {
 
   const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
     let target = e.target as HTMLDivElement;
-
     // if target is nested change target to parent
     if (!target.id) {
       target = target.parentElement as HTMLDivElement;
     }
-
     target.style.background = '';
   };
 
@@ -155,7 +160,11 @@ const DepartmentsTree = () => {
     target.style.background = '';
   };
 
-  const dropHandler = (e: React.DragEvent<HTMLDivElement>, nodeId: string) => {
+  const dropHandler = (
+    e: React.DragEvent<HTMLDivElement>,
+    nodeId: string,
+    employe?: Employe | null
+  ) => {
     e.preventDefault();
     let target = e.target as HTMLDivElement;
 
@@ -165,20 +174,38 @@ const DepartmentsTree = () => {
     }
 
     // if target is the same as draggable item return immediately
-    if (target.id === currentTreeItem?.id) {
+    if (
+      target.id === currentTreeItem?.id ||
+      target.id === employe?.departmentId
+    ) {
       return;
     }
 
     // change background to default after drop
     target.style.background = '';
 
-    const isCurrentItemAndNotSameParent =
-      currentTreeItem && currentTreeItem.departmentId !== nodeId;
-    if (isCurrentItemAndNotSameParent) {
-      changeDepartment({
-        ...currentTreeItem,
-        departmentId: nodeId,
-      });
+    if (employe) {
+      const isCurrentItemAndNotSameParent =
+        currentDragEmploye && currentDragEmploye.departmentId !== nodeId;
+
+      if (isCurrentItemAndNotSameParent) {
+        dispatch(changeDragEmploye(null));
+
+        changeEmployeDepartment({
+          ...currentDragEmploye,
+          departmentId: nodeId,
+        });
+      }
+    } else {
+      const isCurrentItemAndNotSameParent =
+        currentTreeItem && currentTreeItem.departmentId !== nodeId;
+      if (isCurrentItemAndNotSameParent) {
+        setCurrentTreeItem(null);
+        changeDepartment({
+          ...currentTreeItem,
+          departmentId: nodeId,
+        });
+      }
     }
   };
 
@@ -214,7 +241,7 @@ const DepartmentsTree = () => {
               onDragStart={(e) => dragStartHandler(e, node)}
               onDragLeave={(e) => dragLeaveHandler(e)}
               onDragEnd={(e) => dragEndHandler(e)}
-              onDrop={(e) => dropHandler(e, node.id)}
+              onDrop={(e) => dropHandler(e, node.id, currentDragEmploye)}
               onDragOver={(e) => dragOverHandler(e)}
             >
               <Typography sx={{ marginRight: '10px' }}>{node.name}</Typography>

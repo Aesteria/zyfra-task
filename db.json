@@ -17,6 +17,13 @@
       "name": "Backend",
       "departmentId": "rootDepartments",
       "id": "KYHaa3f"
+    },
+    {
+      "description": "fsafsafsa",
+      "createdAt": "2022-09-09T13:23:02.000Z",
+      "name": "fsafas",
+      "departmentId": "KYHaa3f",
+      "id": "_5EV8cw"
     }
   ],
   "staff": [
@@ -27,16 +34,7 @@
       "name": "xd",
       "driversLicense": true,
       "id": 3,
-      "departmentId": "70yeI2X"
-    },
-    {
-      "birthDate": "1996-01-01T00:00:00.000Z",
-      "position": "Senior Engineer",
-      "gender": "мужской",
-      "name": "John Doe",
-      "driversLicense": true,
-      "departmentId": "70yeI2X",
-      "id": 5
+      "departmentId": "KYHaa3f"
     },
     {
       "birthDate": "1996-01-01T00:00:00.000Z",
@@ -73,6 +71,87 @@
       "driversLicense": true,
       "departmentId": "KYHaa3f",
       "id": 10
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "dasdasdasdsa",
+      "gender": "мужской",
+      "name": "asdsad",
+      "driversLicense": false,
+      "departmentId": "KYHaa3f",
+      "id": 11
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "dasdasdasdsa",
+      "gender": "мужской",
+      "name": "asdsad",
+      "driversLicense": true,
+      "departmentId": "KYHaa3f",
+      "id": 12
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "adssdas",
+      "gender": "мужской",
+      "name": "ads",
+      "driversLicense": false,
+      "departmentId": "KYHaa3f",
+      "id": 14
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "adssdas",
+      "gender": "мужской",
+      "name": "ads",
+      "driversLicense": false,
+      "departmentId": "_5EV8cw",
+      "id": 15
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "adssdas",
+      "gender": "мужской",
+      "name": "ads",
+      "driversLicense": false,
+      "departmentId": "_5EV8cw",
+      "id": 16
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "asd",
+      "gender": "мужской",
+      "name": "asd",
+      "driversLicense": false,
+      "departmentId": "70yeI2X",
+      "id": 17
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "asdzzz",
+      "gender": "мужской",
+      "name": "asd",
+      "driversLicense": false,
+      "departmentId": "70yeI2X",
+      "id": 18
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "asdzzz",
+      "gender": "мужской",
+      "name": "asd",
+      "driversLicense": false,
+      "departmentId": "70yeI2X",
+      "id": 19
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "asdzzz",
+      "gender": "мужской",
+      "name": "asd",
+      "driversLicense": false,
+      "departmentId": "70yeI2X",
+      "id": 20
     }
   ]
 }

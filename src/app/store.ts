@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import { apiSlice } from '../features/api/api';
 import departmentsReducer from '../features/departments/departmentsSlice';
+import staffReducer from '../features/staff/staffSlice';
 
 export const store = configureStore({
   reducer: {
     departments: departmentsReducer,
+    staff: staffReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

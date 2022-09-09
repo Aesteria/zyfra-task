@@ -79,6 +79,14 @@ export const apiSlice = createApi({
       }),
       invalidatesTags: ['Department'],
     }),
+    changeEmployeDepartment: builder.mutation({
+      query: (employe: Employe) => ({
+        url: `/staff/${employe.id}`,
+        method: 'PUT',
+        body: employe,
+      }),
+      invalidatesTags: ['Employe'],
+    }),
   }),
 });
 
@@ -94,4 +102,5 @@ export const {
   useGetDepartmentByIdQuery,
   useEditDepartmentMutation,
   useChangeDepartmentOrderMutation,
+  useChangeEmployeDepartmentMutation,
 } = apiSlice;

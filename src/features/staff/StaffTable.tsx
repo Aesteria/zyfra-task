@@ -8,9 +8,10 @@ import TableRow from '@mui/material/TableRow';
 import { Employe } from '../../types/staff';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import Button from '@mui/material/Button';
 import dayjs from 'dayjs';
 import { styled } from '@mui/material/styles';
+import { useAppDispatch } from '../../app/hooks';
+import { changeDragEmploye } from './staffSlice';
 const headings = [
   'ФИО',
   'Дата рождения',
@@ -40,6 +41,7 @@ const StaffTable = ({
   removeEmployeHandler,
   openModalHandler,
 }: StaffTableProps) => {
+  const dispatch = useAppDispatch();
   return (
     <TableContainer>
       <Table sx={{ width: 1150 }} aria-label="table">
@@ -52,7 +54,13 @@ const StaffTable = ({
         </TableHead>
         <TableBody>
           {staff.map((employe) => (
-            <StyledTableRow key={employe.id}>
+            <StyledTableRow
+              key={employe.id}
+              draggable
+              onDragStart={(e) => {
+                dispatch(changeDragEmploye(employe));
+              }}
+            >
               <TableCell component="th" scope="row">
                 {employe.name}
               </TableCell>
@@ -76,8 +84,6 @@ const StaffTable = ({
                 >
                   <EditIcon sx={{ color: 'green' }} />
                 </IconButton>
-
-                <Button variant="outlined">Изменить отдел</Button>
               </TableCell>
             </StyledTableRow>
           ))}
