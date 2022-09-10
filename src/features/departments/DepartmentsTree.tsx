@@ -225,9 +225,12 @@ const DepartmentsTree = () => {
     target.style.background = 'rgb(25, 118, 210, 0.4)';
   };
 
-  const renderTree = (nodes: Department[], parentId: string) => {
+  const renderTree = (nodes: Department[], parentId: string | null) => {
+    const isRoot = !Boolean(parentId);
     if (isSuccess) {
-      const filtered = nodes.filter((node) => node.departmentId === parentId);
+      const filtered = nodes.filter((node) =>
+        isRoot ? node.id === 'rootDepartments' : node.departmentId === parentId
+      );
       return filtered.map((node) => (
         <TreeItem
           onFocusCapture={(e) => e.stopPropagation()}
@@ -236,7 +239,7 @@ const DepartmentsTree = () => {
           label={
             <div
               id={node.id}
-              draggable
+              draggable={!isRoot}
               style={{ display: 'flex', alignItems: 'center' }}
               onDragStart={(e) => dragStartHandler(e, node)}
               onDragLeave={(e) => dragLeaveHandler(e)}
@@ -252,20 +255,26 @@ const DepartmentsTree = () => {
               >
                 <AddBoxIcon sx={{ color: '#1976d2', pointerEvents: 'none' }} />
               </IconButton>
-              <IconButton
-                aria-label="delete"
-                size="small"
-                onClick={(e) => deleteClickHandler(e, node.id)}
-              >
-                <DeleteIcon sx={{ color: '#FC3400', pointerEvents: 'none' }} />
-              </IconButton>
-              <IconButton
-                aria-label="edit"
-                size="small"
-                onClick={(e) => editClickHandler(e, node.id)}
-              >
-                <EditIcon sx={{ color: '#2E2C34', pointerEvents: 'none' }} />
-              </IconButton>
+              {!isRoot && (
+                <IconButton
+                  aria-label="delete"
+                  size="small"
+                  onClick={(e) => deleteClickHandler(e, node.id)}
+                >
+                  <DeleteIcon
+                    sx={{ color: '#FC3400', pointerEvents: 'none' }}
+                  />
+                </IconButton>
+              )}
+              {!isRoot && (
+                <IconButton
+                  aria-label="edit"
+                  size="small"
+                  onClick={(e) => editClickHandler(e, node.id)}
+                >
+                  <EditIcon sx={{ color: '#2E2C34', pointerEvents: 'none' }} />
+                </IconButton>
+              )}
             </div>
           }
         >
@@ -286,41 +295,7 @@ const DepartmentsTree = () => {
           dispatch(selectDepartment(nodeId));
         }}
       >
-        {isSuccess && (
-          <TreeItem
-            onFocusCapture={(e) => e.stopPropagation()}
-            nodeId="rootDepartments"
-            sx={{ userSelect: 'none' }}
-            label={
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-                onDragLeave={(e) => dragLeaveHandler(e)}
-                onDragEnd={(e) => dragEndHandler(e)}
-                onDrop={(e) => dropHandler(e, 'rootDepartments')}
-                onDragOver={(e) => dragOverHandler(e)}
-                id="rootDepartments"
-              >
-                <Typography sx={{ marginRight: '10px' }}>
-                  Подразделения
-                </Typography>
-                <IconButton
-                  aria-label="add"
-                  size="small"
-                  onClick={(e) => addClickHandler(e, 'rootDepartments')}
-                >
-                  <AddBoxIcon
-                    sx={{ color: '#1976d2', pointerEvents: 'none' }}
-                  />
-                </IconButton>
-              </div>
-            }
-          >
-            {renderTree(departments, 'rootDepartments')}
-          </TreeItem>
-        )}
+        {isSuccess && renderTree(departments, null)}
       </TreeView>
       {modal.open && (
         <AddEditDepartmentDialog
