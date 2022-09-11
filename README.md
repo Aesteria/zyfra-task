@@ -1,3 +1,7 @@
+## npm install
+
+Команда для установки зависимостей
+
 ## Available Scripts
 
 ### `npm start`
