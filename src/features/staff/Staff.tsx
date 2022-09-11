@@ -14,6 +14,7 @@ import AddEditEmployeDialog from './AddEditEmployeDialog';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../app/hooks';
 import Typography from '@mui/material/Typography';
+import dayjs from 'dayjs';
 
 type EditModalState = {
   employeId: string | null;
@@ -121,6 +122,9 @@ const Staff = () => {
         </Typography>
         <Typography sx={{ marginBottom: '25px' }}>
           Описание: {department?.description}
+        </Typography>
+        <Typography sx={{ marginBottom: '25px' }}>
+          Дата формирования: {dayjs(department?.createdAt).format('DD/MM/YYYY')}
         </Typography>
         <Button
           variant="contained"
