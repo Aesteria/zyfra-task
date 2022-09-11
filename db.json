@@ -19,32 +19,39 @@
       "id": "KYHaa3f"
     },
     {
-      "description": "quality assurance",
-      "createdAt": "2022-09-11T19:04:40.000Z",
-      "name": "QAA",
-      "id": "i58WTGs",
-      "departmentId": "rootDepartments"
+      "description": "React development team",
+      "createdAt": "2022-09-11T19:27:54.000Z",
+      "name": "React Devs",
+      "departmentId": "70yeI2X",
+      "id": "qLtidTE"
     },
     {
-      "description": "test1 desc",
-      "createdAt": "2022-09-11T19:04:40.000Z",
-      "name": "test1",
-      "departmentId": "i58WTGs",
-      "id": "ODNEWk1"
+      "description": "Angular development team",
+      "createdAt": "2022-09-11T19:27:54.000Z",
+      "name": "Angular Devs",
+      "departmentId": "70yeI2X",
+      "id": "ibg6ZHy"
     },
     {
-      "description": "test2 desc",
-      "createdAt": "2022-09-11T19:04:40.000Z",
-      "name": "test2",
-      "departmentId": "i58WTGs",
-      "id": "ROjw5-g"
+      "description": "Vue is best",
+      "createdAt": "2022-09-11T19:27:54.000Z",
+      "name": "Vue ",
+      "departmentId": "70yeI2X",
+      "id": "kmIYsl8"
     },
     {
-      "description": "sda",
-      "createdAt": "2022-09-10T19:23:34.000Z",
-      "name": "asd",
-      "departmentId": "rootDepartments",
-      "id": "J2LeQW7"
+      "description": "SSR",
+      "createdAt": "2022-09-11T19:27:54.000Z",
+      "name": "Nextjs",
+      "departmentId": "qLtidTE",
+      "id": "EL0oKq5"
+    },
+    {
+      "description": "Remix is better than Next",
+      "createdAt": "2022-09-11T19:27:54.000Z",
+      "name": "Remix",
+      "departmentId": "qLtidTE",
+      "id": "99Pe5rm"
     }
   ],
   "staff": [
@@ -63,7 +70,7 @@
       "gender": "женский",
       "name": "Aesteria",
       "driversLicense": true,
-      "departmentId": "KYHaa3f",
+      "departmentId": "70yeI2X",
       "id": 8
     },
     {
@@ -117,53 +124,8 @@
       "gender": "мужской",
       "name": "1",
       "driversLicense": true,
-      "departmentId": "70yeI2X",
+      "departmentId": "99Pe5rm",
       "id": 20
-    },
-    {
-      "birthDate": "2004-12-31T21:00:00.000Z",
-      "position": "afs",
-      "gender": "мужской",
-      "name": "saffsa",
-      "driversLicense": true,
-      "departmentId": "ROjw5-g",
-      "id": 21
-    },
-    {
-      "birthDate": "1996-01-01T00:00:00.000Z",
-      "position": "Senior QA engineer",
-      "gender": "мужской",
-      "name": "John Doe",
-      "driversLicense": false,
-      "departmentId": "ROjw5-g",
-      "id": 22
-    },
-    {
-      "birthDate": "1992-11-30T21:00:00.000Z",
-      "position": "Junior QA Engineer",
-      "gender": "мужской",
-      "name": "Aesteriaaaa",
-      "driversLicense": true,
-      "id": 23,
-      "departmentId": "ODNEWk1"
-    },
-    {
-      "birthDate": "1899-12-31T21:29:43.000Z",
-      "position": "das",
-      "gender": "мужской",
-      "name": "sad",
-      "driversLicense": true,
-      "departmentId": "ODNEWk1",
-      "id": 24
-    },
-    {
-      "birthDate": "1989-12-31T21:00:00.000Z",
-      "position": "asddsa",
-      "gender": "мужской",
-      "name": "ads",
-      "driversLicense": true,
-      "departmentId": "ODNEWk1",
-      "id": 25
     },
     {
       "birthDate": "2009-12-31T21:00:00.000Z",
@@ -200,6 +162,87 @@
       "driversLicense": true,
       "departmentId": "KYHaa3f",
       "id": 29
+    },
+    {
+      "birthDate": "1969-12-31T21:00:00.000Z",
+      "position": "Senior Engineer",
+      "gender": "мужской",
+      "name": "John Doe",
+      "driversLicense": true,
+      "departmentId": "qLtidTE",
+      "id": 30
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "Middle Engineer",
+      "gender": "мужской",
+      "name": "Ann Doe",
+      "driversLicense": true,
+      "departmentId": "qLtidTE",
+      "id": 31
+    },
+    {
+      "birthDate": "1949-12-31T21:00:00.000Z",
+      "position": "Junior Engineer",
+      "gender": "мужской",
+      "name": "Asda Aest",
+      "driversLicense": true,
+      "departmentId": "qLtidTE",
+      "id": 32
+    },
+    {
+      "birthDate": "1980-09-10T21:00:00.000Z",
+      "position": "Trainee",
+      "gender": "женский",
+      "name": "Eleum Loyce",
+      "driversLicense": true,
+      "departmentId": "qLtidTE",
+      "id": 33
+    },
+    {
+      "birthDate": "1977-05-03T21:00:00.000Z",
+      "position": "Team lead",
+      "gender": "мужской",
+      "name": "Kentc Dodds",
+      "driversLicense": true,
+      "departmentId": "99Pe5rm",
+      "id": 34
+    },
+    {
+      "birthDate": "1943-12-31T21:00:00.000Z",
+      "position": "das",
+      "gender": "мужской",
+      "name": "asd",
+      "driversLicense": false,
+      "departmentId": "70yeI2X",
+      "id": 35
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "ttest2",
+      "gender": "женский",
+      "name": "ttttttttt",
+      "driversLicense": true,
+      "departmentId": "EL0oKq5",
+      "id": 36
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "dsds",
+      "gender": "мужской",
+      "name": "asd",
+      "driversLicense": true,
+      "departmentId": "ibg6ZHy",
+      "id": 37
+    },
+    {
+      "birthDate": "1996-01-01T00:00:00.000Z",
+      "position": "dsds",
+      "gender": "мужской",
+      "name": "asd",
+      "driversLicense": true,
+      "departmentId": "ibg6ZHy",
+      "id": 38
     }
   ]
 }

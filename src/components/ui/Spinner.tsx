@@ -3,7 +3,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 const Spinner = () => {
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
       <CircularProgress />
     </Box>
   );

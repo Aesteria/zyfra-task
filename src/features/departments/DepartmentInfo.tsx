@@ -46,7 +46,9 @@ const DepartmentInfo = () => {
     }
   }
 
-  return <div style={{ marginBottom: '15px' }}>{content}</div>;
+  return (
+    <div style={{ marginBottom: '15px', minHeight: '110px' }}>{content}</div>
+  );
 };
 
 export default DepartmentInfo;
