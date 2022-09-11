@@ -8,18 +8,14 @@ import {
   useGetDepartmentsQuery,
   useRemoveDepartmentMutation,
 } from '../api/api';
-import Typography from '@mui/material/Typography';
-import AddBoxIcon from '@mui/icons-material/AddBox';
-import DeleteIcon from '@mui/icons-material/Delete';
 import { Department, DepartmentFormData } from '../../types/department';
-import EditIcon from '@mui/icons-material/Edit';
 import React, { SyntheticEvent, useCallback, useRef, useState } from 'react';
 import AddEditDepartmentDialog from './AddEditDepartmentDialog';
 import { toast } from 'react-toastify';
-import IconButton from '@mui/material/IconButton';
 import { useAppDispatch } from '../../app/hooks';
 import { selectDepartment } from './departmentsSlice';
 import DraggableTreeItem from './DraggableTreeItem';
+import DepartmentTreeItemContent from './DepartmentTreeItemContent';
 
 type EditModalState = {
   departmentId: string | null;
@@ -149,36 +145,13 @@ const DepartmentsTree = () => {
               changeCurrentTreeItem={changeCurrentTreeItem}
               currentTreeItem={currentTreeItem}
             >
-              <Typography sx={{ marginRight: '10px', userSelect: 'none' }}>
-                {node.name}
-              </Typography>
-              <IconButton
-                aria-label="add"
-                size="small"
-                onClick={(e) => addClickHandler(e, node.id)}
-              >
-                <AddBoxIcon sx={{ color: '#1976d2', pointerEvents: 'none' }} />
-              </IconButton>
-              {!isRoot && (
-                <IconButton
-                  aria-label="delete"
-                  size="small"
-                  onClick={(e) => deleteClickHandler(e, node.id)}
-                >
-                  <DeleteIcon
-                    sx={{ color: '#FC3400', pointerEvents: 'none' }}
-                  />
-                </IconButton>
-              )}
-              {!isRoot && (
-                <IconButton
-                  aria-label="edit"
-                  size="small"
-                  onClick={(e) => editClickHandler(e, node.id)}
-                >
-                  <EditIcon sx={{ color: '#2E2C34', pointerEvents: 'none' }} />
-                </IconButton>
-              )}
+              <DepartmentTreeItemContent
+                addClickHandler={addClickHandler}
+                deleteClickHandler={deleteClickHandler}
+                editClickHandler={editClickHandler}
+                isRoot={isRoot}
+                node={node}
+              />
             </DraggableTreeItem>
           }
         >
