@@ -15,7 +15,7 @@ import AddBoxIcon from '@mui/icons-material/AddBox';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Department, DepartmentFormData } from '../../types/department';
 import EditIcon from '@mui/icons-material/Edit';
-import React, { SyntheticEvent, useCallback, useState } from 'react';
+import React, { SyntheticEvent, useCallback, useRef, useState } from 'react';
 import AddEditDepartmentDialog from './AddEditDepartmentDialog';
 import { toast } from 'react-toastify';
 import IconButton from '@mui/material/IconButton';
@@ -49,6 +49,7 @@ const DepartmentsTree = () => {
   );
   const [changeDepartment] = useChangeDepartmentOrderMutation();
   const [changeEmployeDepartment] = useChangeEmployeDepartmentMutation();
+  const treeViewRef = useRef<HTMLLIElement | null>(null);
 
   const openModalHandler = (id: string, edit: boolean) => {
     if (id) {
@@ -114,9 +115,9 @@ const DepartmentsTree = () => {
     const removeDep = async () => {
       try {
         dispatch(selectDepartment(null));
-        await removeDepartment(id);
+        await removeDepartment(id).unwrap();
         toast.success('Подразделение успешно удалено');
-      } catch (e) {
+      } catch (e: any) {
         console.log(e);
         toast.warn('что-то пошло не так');
       }
@@ -173,11 +174,25 @@ const DepartmentsTree = () => {
       target = target.parentElement as HTMLDivElement;
     }
 
-    // if target is the same as draggable item return immediately
-    if (
-      target.id === currentTreeItem?.id ||
-      target.id === employe?.departmentId
-    ) {
+    dispatch(changeDragEmploye(null));
+    setCurrentTreeItem(null);
+    target.style.background = '';
+
+    // check if parent element in tree is trying to drop to nested children
+    const isTargetParentDropInSelfNested = Boolean(
+      treeViewRef?.current
+        ?.querySelector(`[id=':r1:-${currentTreeItem?.id}']`)
+        ?.querySelector(`[id='${target.id}']`)
+    );
+
+    // if target is the same as draggable item
+    const isSameDepartment =
+      currentTreeItem && target.id === currentTreeItem.id;
+    const isSameEmploye = employe && target.id === employe.departmentId;
+    const isSameTarget = isSameDepartment || isSameEmploye;
+    const isEmployeDropInRoot = employe && target.id === 'rootDepartments';
+
+    if (isTargetParentDropInSelfNested || isEmployeDropInRoot || isSameTarget) {
       return;
     }
 
@@ -247,7 +262,9 @@ const DepartmentsTree = () => {
               onDrop={(e) => dropHandler(e, node.id, currentDragEmploye)}
               onDragOver={(e) => dragOverHandler(e)}
             >
-              <Typography sx={{ marginRight: '10px' }}>{node.name}</Typography>
+              <Typography sx={{ marginRight: '10px', userSelect: 'none' }}>
+                {node.name}
+              </Typography>
               <IconButton
                 aria-label="add"
                 size="small"
@@ -294,6 +311,7 @@ const DepartmentsTree = () => {
         onNodeSelect={(event: SyntheticEvent, nodeId: string) => {
           dispatch(selectDepartment(nodeId));
         }}
+        ref={treeViewRef}
       >
         {isSuccess && renderTree(departments, null)}
       </TreeView>
