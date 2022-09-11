@@ -21,6 +21,7 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Box from '@mui/material/Box';
+import dayjs from 'dayjs';
 
 type AddEditEmployeDialogProps = {
   employeId: string | null;
@@ -54,6 +55,16 @@ const AddEditEmployeDialog = ({
       position: yup.string().required('Необходимо указать должность'),
       birthDate: yup
         .date()
+        .test(
+          'birthDate',
+          'Возраст не больше 80 и не меньше 18 лет',
+          (value) => {
+            return (
+              dayjs(new Date()).diff(value, 'year') >= 18 &&
+              dayjs(new Date()).diff(value, 'year') < 80
+            );
+          }
+        )
         .required('Необходимо указать дату рождения')
         .typeError('Некорректная дата рождения'),
     })
