@@ -6,16 +6,14 @@ import StaffTable from './StaffTable';
 import {
   useAddNewEmployeMutation,
   useEditEmployeeMutation,
-  useGetDepartmentByIdQuery,
   useGetStaffQuery,
   useRemoveEmployeeMutation,
 } from '../api/api';
 import AddEditEmployeDialog from './AddEditEmployeDialog';
 import { toast } from 'react-toastify';
 import { useAppSelector } from '../../app/hooks';
-import Typography from '@mui/material/Typography';
-import dayjs from 'dayjs';
-
+import Spinner from '../../components/ui/Spinner';
+import Alert from '@mui/material/Alert';
 type EditModalState = {
   employeId: string | null;
   open: boolean;
@@ -27,24 +25,18 @@ const Staff = () => {
     isSuccess,
     isLoading,
     isError,
+    error,
   } = useGetStaffQuery();
   const [modal, setModal] = useState<EditModalState>({
     employeId: null,
     open: false,
   });
+
   const [addEmploye] = useAddNewEmployeMutation();
   const [removeEmploye] = useRemoveEmployeeMutation();
   const [editEmploye] = useEditEmployeeMutation();
   const selectedDepartment = useAppSelector(
     (state) => state.departments.selected
-  );
-
-  const { data: department } = useGetDepartmentByIdQuery(
-    selectedDepartment as string,
-    {
-      skip:
-        selectedDepartment === 'rootDepartments' || selectedDepartment === null,
-    }
   );
 
   const staffFiltered = useMemo(() => {
@@ -78,7 +70,7 @@ const Staff = () => {
         ...employeData,
         birthDate: employeData.birthDate as string,
         departmentId: selectedDepartment as string,
-      });
+      }).unwrap();
       toast('сотрудник успешно добавлен');
     } catch (e: any) {
       console.log(e);
@@ -88,7 +80,7 @@ const Staff = () => {
 
   const removeEmployeHandler = async (id: string) => {
     try {
-      await removeEmploye(id);
+      await removeEmploye(id).unwrap();
       toast('сотрудник успешно удален');
     } catch (e: any) {
       console.log(e);
@@ -98,7 +90,7 @@ const Staff = () => {
 
   const editEmployeHandler = async (employe: Employe) => {
     try {
-      await editEmploye(employe);
+      await editEmploye(employe).unwrap();
       closeModalHandler();
       toast('изменения сохранены');
     } catch (e: any) {
@@ -108,24 +100,13 @@ const Staff = () => {
   };
 
   let content;
-  const showTable =
-    isSuccess && selectedDepartment && selectedDepartment !== 'rootDepartments';
-  const showPrompt =
-    isSuccess &&
-    (!selectedDepartment || selectedDepartment === 'rootDepartments');
+  const showTable = isSuccess && selectedDepartment;
 
-  if (showTable) {
+  if (isLoading) {
+    content = <Spinner />;
+  } else if (showTable) {
     content = (
       <div>
-        <Typography variant="h5" component="h2">
-          Название отдела: {department?.name}
-        </Typography>
-        <Typography sx={{ marginBottom: '25px' }}>
-          Описание: {department?.description}
-        </Typography>
-        <Typography sx={{ marginBottom: '25px' }}>
-          Дата формирования: {dayjs(department?.createdAt).format('DD/MM/YYYY')}
-        </Typography>
         <Button
           variant="contained"
           startIcon={<AddCircleIcon />}
@@ -150,16 +131,12 @@ const Staff = () => {
         )}
       </div>
     );
-  } else if (showPrompt) {
-    content = <p>Выберите подразделение</p>;
-  }
-
-  if (isLoading) {
-    content = <p>Loading..</p>;
-  }
-
-  if (isError) {
-    content = <p>Ошибка</p>;
+  } else if (isError) {
+    if ('data' in error) {
+      content = (
+        <Alert severity="error">Ошибка. Статус ошибки: {error.status}</Alert>
+      );
+    }
   }
 
   return <>{content}</>;

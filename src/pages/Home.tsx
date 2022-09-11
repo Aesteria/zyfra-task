@@ -7,6 +7,7 @@ import Main from '../components/ui/Main';
 import DepartmentsTree from '../features/departments/DepartmentsTree';
 import Divider from '@mui/material/Divider';
 import Staff from '../features/staff/Staff';
+import DepartmentInfo from '../features/departments/DepartmentInfo';
 
 function HomePage() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -27,6 +28,7 @@ function HomePage() {
 
       <Main>
         <Toolbar />
+        <DepartmentInfo />
         <Staff />
       </Main>
     </Box>

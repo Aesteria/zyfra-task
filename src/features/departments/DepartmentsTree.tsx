@@ -77,7 +77,7 @@ const DepartmentsTree = () => {
 
   const editDepartmentHandler = async (employe: Department) => {
     try {
-      await editDepartment(employe);
+      await editDepartment(employe).unwrap();
       toast('изменения сохранены!');
     } catch (e: any) {
       console.log(e);
@@ -91,7 +91,7 @@ const DepartmentsTree = () => {
         ...departmentData,
         createdAt: departmentData.createdAt as string,
         departmentId: modal.departmentId as string,
-      });
+      }).unwrap();
       toast(`Подразделение ${departmentData.name} добавлено`);
     } catch (e: any) {
       console.log(e);
@@ -308,8 +308,13 @@ const DepartmentsTree = () => {
         defaultCollapseIcon={<ExpandMoreIcon />}
         defaultExpandIcon={<ChevronRightIcon />}
         sx={{ height: 240, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}
-        onNodeSelect={(event: SyntheticEvent, nodeId: string) => {
-          dispatch(selectDepartment(nodeId));
+        onNodeSelect={(_: SyntheticEvent, nodeId: string) => {
+          // if its root then set to null, because we dont need staff data on root
+          if (nodeId !== 'rootDepartments') {
+            dispatch(selectDepartment(nodeId));
+          } else {
+            dispatch(selectDepartment(null));
+          }
         }}
         ref={treeViewRef}
       >
