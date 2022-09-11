@@ -190,6 +190,8 @@ const AddEditEmployeDialog = ({
                   inputFormat={'DD/MM/YYYY'}
                   label="Введите дату рождения"
                   value={value}
+                  minDate={'01/01/1942'}
+                  maxDate={'01/01/2004'}
                   onChange={onChange}
                   renderInput={(params) => (
                     <TextField

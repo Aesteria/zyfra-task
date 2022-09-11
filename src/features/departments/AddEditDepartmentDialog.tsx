@@ -166,6 +166,8 @@ const AddEditDepartmentDialog = ({
                   inputFormat={'DD/MM/YYYY'}
                   label="Дата создания"
                   value={value}
+                  maxDate={new Date().toString()}
+                  minDate={'01/01/1970'}
                   onChange={onChange}
                   renderInput={(params) => (
                     <TextField
