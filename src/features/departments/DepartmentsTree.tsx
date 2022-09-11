@@ -4,8 +4,6 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   useAddDepartmentMutation,
-  useChangeDepartmentOrderMutation,
-  useChangeEmployeDepartmentMutation,
   useEditDepartmentMutation,
   useGetDepartmentsQuery,
   useRemoveDepartmentMutation,
@@ -19,10 +17,9 @@ import React, { SyntheticEvent, useCallback, useRef, useState } from 'react';
 import AddEditDepartmentDialog from './AddEditDepartmentDialog';
 import { toast } from 'react-toastify';
 import IconButton from '@mui/material/IconButton';
-import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { useAppDispatch } from '../../app/hooks';
 import { selectDepartment } from './departmentsSlice';
-import { Employe } from '../../types/staff';
-import { changeDragEmploye } from '../staff/staffSlice';
+import DraggableTreeItem from './DraggableTreeItem';
 
 type EditModalState = {
   departmentId: string | null;
@@ -41,15 +38,14 @@ const DepartmentsTree = () => {
     isEdit: false,
   });
   const dispatch = useAppDispatch();
+  const treeViewRef = useRef<HTMLLIElement | null>(null);
   const [currentTreeItem, setCurrentTreeItem] = useState<Department | null>(
     null
   );
-  const currentDragEmploye = useAppSelector(
-    (state) => state.staff.currentDragEmploye
-  );
-  const [changeDepartment] = useChangeDepartmentOrderMutation();
-  const [changeEmployeDepartment] = useChangeEmployeDepartmentMutation();
-  const treeViewRef = useRef<HTMLLIElement | null>(null);
+
+  const changeCurrentTreeItem = (node: Department | null) => {
+    setCurrentTreeItem(node);
+  };
 
   const openModalHandler = (id: string, edit: boolean) => {
     if (id) {
@@ -134,112 +130,6 @@ const DepartmentsTree = () => {
     openModalHandler(id, true);
   };
 
-  const dragStartHandler = (
-    e: React.DragEvent<HTMLDivElement>,
-    node: Department
-  ) => {
-    setCurrentTreeItem(node);
-  };
-
-  const dragLeaveHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    let target = e.target as HTMLDivElement;
-    // if target is nested change target to parent
-    if (!target.id) {
-      target = target.parentElement as HTMLDivElement;
-    }
-    target.style.background = '';
-  };
-
-  const dragEndHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    let target = e.target as HTMLDivElement;
-
-    // if target is nested change target to parent
-    if (!target.id) {
-      target = target.parentElement as HTMLDivElement;
-    }
-
-    target.style.background = '';
-  };
-
-  const dropHandler = (
-    e: React.DragEvent<HTMLDivElement>,
-    nodeId: string,
-    employe?: Employe | null
-  ) => {
-    e.preventDefault();
-    let target = e.target as HTMLDivElement;
-
-    // if target is nested change target to parent
-    if (!target.id) {
-      target = target.parentElement as HTMLDivElement;
-    }
-
-    dispatch(changeDragEmploye(null));
-    setCurrentTreeItem(null);
-    target.style.background = '';
-
-    // check if parent element in tree is trying to drop to nested children
-    const isTargetParentDropInSelfNested = Boolean(
-      treeViewRef?.current
-        ?.querySelector(`[id=':r1:-${currentTreeItem?.id}']`)
-        ?.querySelector(`[id='${target.id}']`)
-    );
-
-    // if target is the same as draggable item
-    const isSameDepartment =
-      currentTreeItem && target.id === currentTreeItem.id;
-    const isSameEmploye = employe && target.id === employe.departmentId;
-    const isSameTarget = isSameDepartment || isSameEmploye;
-    const isEmployeDropInRoot = employe && target.id === 'rootDepartments';
-
-    if (isTargetParentDropInSelfNested || isEmployeDropInRoot || isSameTarget) {
-      return;
-    }
-
-    // change background to default after drop
-    target.style.background = '';
-
-    if (employe) {
-      const isCurrentItemAndNotSameParent =
-        currentDragEmploye && currentDragEmploye.departmentId !== nodeId;
-
-      if (isCurrentItemAndNotSameParent) {
-        dispatch(changeDragEmploye(null));
-
-        changeEmployeDepartment({
-          ...currentDragEmploye,
-          departmentId: nodeId,
-        });
-      }
-    } else {
-      const isCurrentItemAndNotSameParent =
-        currentTreeItem && currentTreeItem.departmentId !== nodeId;
-      if (isCurrentItemAndNotSameParent) {
-        setCurrentTreeItem(null);
-        changeDepartment({
-          ...currentTreeItem,
-          departmentId: nodeId,
-        });
-      }
-    }
-  };
-
-  const dragOverHandler = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    let target = e.target as HTMLDivElement;
-
-    // if target is nested change target to parent
-    if (!target.id) {
-      target = target.parentElement as HTMLDivElement;
-    }
-
-    if (target.id === currentTreeItem?.id) {
-      return;
-    }
-
-    target.style.background = 'rgb(25, 118, 210, 0.4)';
-  };
-
   const renderTree = (nodes: Department[], parentId: string | null) => {
     const isRoot = !Boolean(parentId);
     if (isSuccess) {
@@ -252,15 +142,12 @@ const DepartmentsTree = () => {
           key={node.id}
           nodeId={node.id.toString()}
           label={
-            <div
-              id={node.id}
-              draggable={!isRoot}
-              style={{ display: 'flex', alignItems: 'center' }}
-              onDragStart={(e) => dragStartHandler(e, node)}
-              onDragLeave={(e) => dragLeaveHandler(e)}
-              onDragEnd={(e) => dragEndHandler(e)}
-              onDrop={(e) => dropHandler(e, node.id, currentDragEmploye)}
-              onDragOver={(e) => dragOverHandler(e)}
+            <DraggableTreeItem
+              isRoot={isRoot}
+              node={node}
+              treeView={treeViewRef}
+              changeCurrentTreeItem={changeCurrentTreeItem}
+              currentTreeItem={currentTreeItem}
             >
               <Typography sx={{ marginRight: '10px', userSelect: 'none' }}>
                 {node.name}
@@ -292,7 +179,7 @@ const DepartmentsTree = () => {
                   <EditIcon sx={{ color: '#2E2C34', pointerEvents: 'none' }} />
                 </IconButton>
               )}
-            </div>
+            </DraggableTreeItem>
           }
         >
           {renderTree(departments, node.id)}
