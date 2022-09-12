@@ -2,6 +2,10 @@
 
 Команда для установки зависимостей
 
+## npm install -g json-server
+
+Установка json-server
+
 ## Available Scripts
 
 ### `npm start`
